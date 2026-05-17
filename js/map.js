@@ -8,7 +8,9 @@ let userMarker = null;
 const BADGE_COLORS = { s: '#4A90D9', b: '#3D8C5A', f: '#C87A30' };
 
 function initMap() {
-  map = L.map('map', { zoomControl: true }).setView([51.2042, 3.2252], 15);
+  const centerLat = STOPS.reduce((s, p) => s + p.lat, 0) / STOPS.length;
+  const centerLng = STOPS.reduce((s, p) => s + p.lng, 0) / STOPS.length;
+  map = L.map('map', { zoomControl: true }).setView([centerLat, centerLng], 15);
 
   L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
     attribution: '&copy; OpenStreetMap &copy; CARTO',
