@@ -5,7 +5,7 @@ let map = null;
 let lmarkers  = [];
 let userMarker = null;
 
-const BADGE_COLORS = { s: '#4A90D9', b: '#3D8C5A', f: '#C87A30' };
+const BADGE_COLORS = { s: '#4A90D9', b: '#3D8C5A', f: '#C87A30', h: '#7C3AED' };
 
 function initMap() {
   const centerLat = STOPS.reduce((s, p) => s + p.lat, 0) / STOPS.length;
@@ -33,15 +33,31 @@ function initMap() {
     m.on('click', () => { selectStop(i); showTab('g'); });
     lmarkers.push(m);
   });
+
+  // Дополнительные метки (отель, транспорт и т.п.) из stops.js
+  if (typeof MARKERS !== 'undefined') {
+    MARKERS.forEach(m => {
+      const icon = L.divIcon({
+        html: `<div style="width:34px;height:34px;background:${m.color || '#333'};border-radius:8px;border:2px solid #fff;display:flex;align-items:center;justify-content:center;font-size:18px;box-shadow:0 2px 8px rgba(0,0,0,.6)">${m.label}</div>`,
+        className: '',
+        iconSize: [34, 34],
+        iconAnchor: [17, 17]
+      });
+      L.marker([m.lat, m.lng], { icon }).addTo(map).bindPopup(m.title);
+    });
+  }
 }
 
 function makeIcon(i, s, isActive, isDone) {
   const c = isActive ? '#C9A84C' : isDone ? '#3D8C5A' : (BADGE_COLORS[s.badge] || '#C9A84C');
   const sz = isActive ? 32 : 28;
-  const label = isDone && !isActive ? '✓' : String(i + 1);
+  const isHotel = s.badge === 'h' && !isActive && !isDone;
+  const label = isDone && !isActive ? '✓' : isHotel ? '🏨' : String(i + 1);
   const textColor = isActive ? '#000' : '#fff';
+  const radius = isHotel ? '6px' : '50%';
+  const fontSize = isHotel ? '15px' : (isActive ? 13 : 11) + 'px';
   return L.divIcon({
-    html: `<div style="width:${sz}px;height:${sz}px;background:${c};border-radius:50%;border:${isActive ? 3 : 2}px solid #fff;display:flex;align-items:center;justify-content:center;font-size:${isActive ? 13 : 11}px;font-weight:700;color:${textColor};box-shadow:0 2px 8px rgba(0,0,0,.6)">${label}</div>`,
+    html: `<div style="width:${sz}px;height:${sz}px;background:${c};border-radius:${radius};border:${isActive ? 3 : 2}px solid #fff;display:flex;align-items:center;justify-content:center;font-size:${fontSize};font-weight:700;color:${textColor};box-shadow:0 2px 8px rgba(0,0,0,.6)">${label}</div>`,
     className: '',
     iconSize: [sz, sz],
     iconAnchor: [sz / 2, sz / 2]
