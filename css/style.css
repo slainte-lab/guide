@@ -256,6 +256,34 @@ body.home {
 .stop-arr { color: var(--muted); font-size: 16px; margin-left: 4px; }
 .stop.cur .stop-arr { color: var(--gold); }
 
+/* ─── WALK CONNECTOR ─── */
+.walk-conn {
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  height: 22px;
+  position: relative;
+}
+.walk-conn::before {
+  content: '';
+  position: absolute;
+  left: 32px;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--border);
+}
+.walk-conn-time {
+  font-size: 10px;
+  color: var(--muted);
+  background: var(--bg);
+  padding: 1px 6px;
+  border-radius: 8px;
+  margin-left: 44px;
+  position: relative;
+  white-space: nowrap;
+}
+
 /* ─── PLAYER ─── */
 .player {
   background: var(--card);

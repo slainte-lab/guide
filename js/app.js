@@ -17,7 +17,11 @@ function showTab(t) {
 
 // ── СПИСОК ОСТАНОВОК ─────────────────────────────────────────────
 function renderList() {
-  document.getElementById('slist').innerHTML = STOPS.map((s, i) => `
+  document.getElementById('slist').innerHTML = STOPS.map((s, i) => {
+    const nextWalk = i < STOPS.length - 1 && STOPS[i + 1].walk
+      ? `<div class="walk-conn"><span class="walk-conn-time">🚶 ${STOPS[i + 1].walk.split(' · ')[0]}</span></div>`
+      : '';
+    return `
     <div class="stop ${i === cur ? 'cur' : ''} ${done.has(i) && i !== cur ? 'done' : ''}"
          onclick="selectStop(${i})">
       <div class="stop-body">
@@ -26,13 +30,13 @@ function renderList() {
           <div class="stop-name">${s.n}</div>
           <div class="stop-meta">
             <span class="stop-time">⏰ ${s.time}</span>
-            ${s.walk ? `<span class="stop-walk">🚶 ${s.walk}</span>` : ''}
             <span class="tag tag-${s.badge}">${s.btxt}</span>
           </div>
         </div>
         <div class="stop-arr">${i === cur ? '▶' : '›'}</div>
       </div>
-    </div>`).join('');
+    </div>${nextWalk}`;
+  }).join('');
 }
 
 // ── ВЫБОР ОСТАНОВКИ ──────────────────────────────────────────────
