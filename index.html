@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>🇧🇪 Брюгге — Аудиогид</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
+<link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+
+<div class="hdr">
+  <div class="hdr-row">
+    <div>
+      <div class="hdr-title">🇧🇪 Брюгге — Аудиогид</div>
+      <div class="hdr-sub">13:00–22:00 · Пешком · 10 остановок · ~7 км</div>
+    </div>
+    <div class="hdr-count"><b id="vcount">0</b>/10 посещено</div>
+  </div>
+  <div class="prog"><div class="prog-fill" id="prog"></div></div>
+</div>
+
+<div class="tabs">
+  <div class="tab-btn active" onclick="showTab('g')">🎧 Гид</div>
+  <div class="tab-btn" onclick="showTab('m')">🗺 Карта</div>
+</div>
+
+<div class="view show" id="view-g">
+  <div class="stops" id="slist"></div>
+  <div class="player">
+    <div class="pl-loc" id="pl-loc">Выберите остановку ниже</div>
+    <div class="pl-title" id="pl-title">Нажмите на остановку, чтобы начать</div>
+    <div class="pl-text" id="pl-text">Добро пожаловать в Брюгге — средневековый город-сказка, почти нетронутый временем. Выберите первую остановку и начните экскурсию.</div>
+    <div class="pl-walk" id="pl-walk">
+      <span>🚶 <span id="wtime"></span></span>
+      <span>📍 <span id="wdist"></span></span>
+    </div>
+    <div class="pl-controls">
+      <button class="btn btn-nav" onclick="go(-1)" id="bprev">◀</button>
+      <button class="btn btn-play" onclick="togglePlay()" id="bplay">▶ Слушать</button>
+      <button class="btn btn-nav" onclick="go(1)" id="bnext">▶</button>
+      <button class="btn btn-done" onclick="markDone()" title="Отметить посещённым">✓</button>
+      <button class="btn btn-map" onclick="openInMaps()" title="Открыть в Google Maps">📍</button>
+    </div>
+  </div>
+</div>
+
+<div class="view" id="view-m">
+  <div id="map"></div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="data/stops.js"></script>
+<script src="js/map.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
