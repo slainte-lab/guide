@@ -2,7 +2,8 @@
 // Leaflet + OpenStreetMap (CartoDB Dark). Без API-ключей.
 
 let map = null;
-let lmarkers = [];
+let lmarkers  = [];
+let userMarker = null;
 
 const BADGE_COLORS = { s: '#4A90D9', b: '#3D8C5A', f: '#C87A30' };
 
@@ -55,4 +56,28 @@ function updateMapMarkers() {
 
 function mapFlyTo(lat, lng) {
   if (map) map.setView([lat, lng], 16, { animate: true });
+}
+
+// ── СИНЯЯ ТОЧКА ПОЛЬЗОВАТЕЛЯ ──────────────────────────────────────
+function updateUserMarker(lat, lng) {
+  if (!map) return;
+  if (!userMarker) {
+    const icon = L.divIcon({
+      html: '<div class="user-dot"><div class="user-pulse"></div></div>',
+      className: '',
+      iconSize:   [20, 20],
+      iconAnchor: [10, 10]
+    });
+    userMarker = L.marker([lat, lng], { icon, interactive: false, zIndexOffset: 1000 })
+      .addTo(map);
+  } else {
+    userMarker.setLatLng([lat, lng]);
+  }
+}
+
+function clearUserMarker() {
+  if (userMarker && map) {
+    map.removeLayer(userMarker);
+    userMarker = null;
+  }
 }

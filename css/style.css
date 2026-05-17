@@ -235,6 +235,87 @@ html, body {
 .btn-done { background: #0F2A18;       color: var(--green); }
 .btn-map  { background: #0E2235;       color: #7BB8E8; }
 
+/* ─── GPS BUTTON ─── */
+.hdr-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-gps {
+  width: 34px;
+  height: 34px;
+  background: var(--card2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--muted);
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background .2s, border-color .2s;
+  flex-shrink: 0;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.btn-gps.on {
+  background: #0E2235;
+  border-color: #4A90D9;
+}
+.btn-gps:active { opacity: .7; }
+
+/* ─── TOAST ─── */
+#toast {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%) translateY(12px);
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 9px 18px;
+  font-size: 13px;
+  color: var(--text);
+  text-align: center;
+  max-width: calc(100% - 32px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .25s, transform .25s;
+  z-index: 2000;
+  box-shadow: 0 4px 20px rgba(0,0,0,.55);
+}
+#toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ─── USER POSITION DOT (Leaflet) ─── */
+.user-dot {
+  width: 14px;
+  height: 14px;
+  background: #4A90D9;
+  border: 2.5px solid #fff;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(74,144,217,.5);
+  position: relative;
+}
+.user-pulse {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: rgba(74, 144, 217, .35);
+  transform: translate(-50%, -50%);
+  animation: gpsPulse 1.8s ease-out infinite;
+}
+@keyframes gpsPulse {
+  0%   { width: 14px; height: 14px; opacity: 1; }
+  100% { width: 44px; height: 44px; opacity: 0; }
+}
+
 /* ─── SPEAKING PULSE ─── */
 .pulse {
   display: inline-block;

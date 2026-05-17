@@ -91,37 +91,6 @@ function openInMaps() {
   window.open(`https://maps.google.com/?q=${s.lat},${s.lng}`, '_blank');
 }
 
-// ── GPS АВТОГИД (опционально) ────────────────────────────────────
-// Раскомментируйте, чтобы гид автоматически запускал аудио
-// при приближении к следующей точке на 50 метров.
-//
-// const GPS_RADIUS = 50; // метры
-//
-// function startGPS() {
-//   if (!navigator.geolocation) return;
-//   navigator.geolocation.watchPosition(pos => {
-//     const { latitude: lat, longitude: lng } = pos.coords;
-//     STOPS.forEach((s, i) => {
-//       if (done.has(i)) return;
-//       const dist = getDistance(lat, lng, s.lat, s.lng);
-//       if (dist < GPS_RADIUS && i !== cur) {
-//         selectStop(i);
-//         startSpeak(s.text);
-//       }
-//     });
-//   }, null, { enableHighAccuracy: true, maximumAge: 5000 });
-// }
-//
-// function getDistance(lat1, lng1, lat2, lng2) {
-//   const R = 6371000;
-//   const dLat = (lat2 - lat1) * Math.PI / 180;
-//   const dLng = (lng2 - lng1) * Math.PI / 180;
-//   const a = Math.sin(dLat/2)**2 +
-//     Math.cos(lat1 * Math.PI/180) * Math.cos(lat2 * Math.PI/180) * Math.sin(dLng/2)**2;
-//   return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-// }
-
 // ── СТАРТ ─────────────────────────────────────────────────────────
 renderList();
 selectStop(0);
-// startGPS(); // раскомментировать для GPS-режима
