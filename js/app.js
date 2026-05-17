@@ -92,5 +92,6 @@ function openInMaps() {
 }
 
 // ── СТАРТ ─────────────────────────────────────────────────────────
+document.getElementById('stop-total').textContent = STOPS.length;
 renderList();
 selectStop(0);
