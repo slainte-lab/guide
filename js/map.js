@@ -18,7 +18,7 @@ function initMap() {
   const centerLng = STOPS.reduce((s, p) => s + p.lng, 0) / STOPS.length;
   map = L.map('map', { zoomControl: true }).setView([centerLat, centerLng], 15);
 
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
     attribution: '&copy; OpenStreetMap &copy; CARTO',
     maxZoom: 19
   }).addTo(map);
@@ -26,9 +26,9 @@ function initMap() {
   // Маршрут пунктиром
   const pts = STOPS.map(s => [s.lat, s.lng]);
   L.polyline(pts, {
-    color: '#C9A84C',
-    weight: 2,
-    opacity: 0.6,
+    color: '#B8860B',
+    weight: 3,
+    opacity: 0.85,
     dashArray: '6,4'
   }).addTo(map);
 
