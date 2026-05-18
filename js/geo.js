@@ -49,7 +49,7 @@ function _onPosition(pos) {
       notifiedStops.add(i);
       selectStop(i);
       showTab('g');
-      startSpeak(s.text);
+      startSpeak();
       showToast(`📍 Вы прибыли на точку ${i + 1}: ${s.n}`);
     }
   });

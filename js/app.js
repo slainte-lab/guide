@@ -89,7 +89,7 @@ function toggleFacts() {
   // Если аудио играло — перезапускаем с новым текстом
   if (speaking || isPaused) {
     stopSpeak();
-    startSpeak(factsMode ? s.facts : s.text);
+    startSpeak();
   }
 }
 
