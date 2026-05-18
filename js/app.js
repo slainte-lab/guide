@@ -1,8 +1,9 @@
 // ─── APP.JS — главная логика ─────────────────────────────────────
 
-let cur  = -1;          // индекс текущей остановки
-let done = new Set();   // посещённые остановки
-let tab  = 'g';         // активная вкладка: 'g' = гид, 'm' = карта
+let cur       = -1;         // индекс текущей остановки
+let done      = new Set();  // посещённые остановки
+let tab       = 'g';        // активная вкладка: 'g' = гид, 'm' = карта
+let factsMode = false;      // показываем дополнительные факты
 
 // ── ТАБЫ ──────────────────────────────────────────────────────────
 function showTab(t) {
@@ -42,6 +43,7 @@ function renderList() {
 // ── ВЫБОР ОСТАНОВКИ ──────────────────────────────────────────────
 function selectStop(i) {
   stopSpeak();
+  factsMode = false;
   cur = i;
   const s = STOPS[i];
 
@@ -50,7 +52,13 @@ function selectStop(i) {
   document.getElementById('pl-text').textContent  = s.text;
   document.getElementById('bprev').disabled        = i === 0;
   document.getElementById('bnext').disabled        = i === STOPS.length - 1;
-  document.getElementById('bplay').textContent     = '▶ Слушать';
+
+  // Кнопка фактов
+  const bFacts = document.getElementById('btn-facts');
+  if (bFacts) {
+    bFacts.disabled = !s.facts;
+    bFacts.classList.remove('on');
+  }
 
   // Блок «до следующей»
   const pw = document.getElementById('pl-walk');
@@ -67,9 +75,22 @@ function selectStop(i) {
   updateMapMarkers();
   if (map) mapFlyTo(s.lat, s.lng);
 
-  // Скролл к карточке
   const cards = document.querySelectorAll('.stop');
   if (cards[i]) cards[i].scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+// ── ДОПОЛНИТЕЛЬНЫЕ ФАКТЫ ─────────────────────────────────────────
+function toggleFacts() {
+  if (cur < 0 || !STOPS[cur].facts) return;
+  factsMode = !factsMode;
+  const s = STOPS[cur];
+  document.getElementById('pl-text').textContent = factsMode ? s.facts : s.text;
+  document.getElementById('btn-facts').classList.toggle('on', factsMode);
+  // Если аудио играло — перезапускаем с новым текстом
+  if (speaking || isPaused) {
+    stopSpeak();
+    startSpeak(factsMode ? s.facts : s.text);
+  }
 }
 
 // ── НАВИГАЦИЯ ─────────────────────────────────────────────────────

@@ -334,8 +334,10 @@ body.home {
 
 .btn-play { background: var(--gold);   color: #000;        flex: 1; font-size: 13px; }
 .btn-nav  { background: var(--card2);  color: var(--text); padding: 9px 13px; }
-.btn-done { background: #0F2A18;       color: var(--green); }
-.btn-map  { background: #0E2235;       color: #7BB8E8; }
+.btn-done  { background: #0F2A18;       color: var(--green); }
+.btn-map   { background: #0E2235;       color: #7BB8E8; }
+.btn-facts { background: var(--card2); color: var(--muted); }
+.btn-facts.on { background: #2A1F00; border: 1px solid var(--gold); color: var(--gold); }
 
 /* ─── MAP FOLLOW BUTTON ─── */
 .map-follow-btn {
