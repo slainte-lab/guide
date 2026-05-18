@@ -337,6 +337,30 @@ body.home {
 .btn-done { background: #0F2A18;       color: var(--green); }
 .btn-map  { background: #0E2235;       color: #7BB8E8; }
 
+/* ─── MAP FOLLOW BUTTON ─── */
+.map-follow-btn {
+  width: 36px;
+  height: 36px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 17px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,.45);
+  transition: background .2s, border-color .2s;
+  -webkit-tap-highlight-color: transparent;
+  margin-bottom: 2px;
+}
+.map-follow-btn.active {
+  background: #0E2235;
+  border-color: #4A90D9;
+  color: #4A90D9;
+}
+.map-follow-btn:active { opacity: .7; }
+
 /* ─── GPS BUTTON ─── */
 .hdr-right {
   display: flex;

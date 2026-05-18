@@ -1,9 +1,15 @@
 // ─── MAP MODULE ─────────────────────────────────────────────────
 // Leaflet + OpenStreetMap (CartoDB Dark). Без API-ключей.
 
-let map = null;
-let lmarkers  = [];
+let map        = null;
+let lmarkers   = [];
 let userMarker = null;
+
+// ── СЛЕЖЕНИЕ ───────────────────────────────────────────────────────
+let mapTrackId       = null;   // id watchPosition карты
+let isFollowing      = true;   // карта следует за позицией
+let isProgrammaticMove = false; // флаг: движение из кода, не пальцем
+let lastPos          = null;   // последняя известная позиция [lat, lng]
 
 const BADGE_COLORS = { s: '#4A90D9', b: '#3D8C5A', f: '#C87A30', h: '#7C3AED' };
 
@@ -46,6 +52,32 @@ function initMap() {
       L.marker([m.lat, m.lng], { icon }).addTo(map).bindPopup(m.title);
     });
   }
+
+  // Кнопка «вернуться к моей позиции»
+  const FollowControl = L.Control.extend({
+    options: { position: 'bottomright' },
+    onAdd() {
+      const btn = L.DomUtil.create('button', 'map-follow-btn');
+      btn.id = 'btn-follow';
+      L.DomEvent.on(btn, 'click', _onFollowClick);
+      L.DomEvent.disableClickPropagation(btn);
+      return btn;
+    }
+  });
+  new FollowControl().addTo(map);
+  _updateFollowBtn();
+
+  // Ручное движение — выключить слежение
+  map.on('dragstart', () => {
+    if (!isProgrammaticMove) {
+      isFollowing = false;
+      _updateFollowBtn();
+    }
+  });
+  map.on('moveend', () => { isProgrammaticMove = false; });
+
+  // Запустить слежение за геопозицией
+  startMapTracking();
 }
 
 function makeIcon(i, s, isActive, isDone) {
@@ -73,7 +105,47 @@ function updateMapMarkers() {
 }
 
 function mapFlyTo(lat, lng) {
-  if (map) map.setView([lat, lng], 16, { animate: true });
+  if (!map) return;
+  // Пользователь выбрал точку — карта показывает её, слежение отключается
+  isFollowing = false;
+  _updateFollowBtn();
+  isProgrammaticMove = true;
+  map.setView([lat, lng], 16, { animate: true });
+}
+
+// ── СЛЕЖЕНИЕ ЗА ГЕОПОЗИЦИЕЙ ────────────────────────────────────────
+function startMapTracking() {
+  if (!navigator.geolocation || mapTrackId !== null) return;
+  mapTrackId = navigator.geolocation.watchPosition(
+    pos => {
+      const { latitude: lat, longitude: lng } = pos.coords;
+      lastPos = [lat, lng];
+      updateUserMarker(lat, lng);
+      if (isFollowing) {
+        isProgrammaticMove = true;
+        map.panTo([lat, lng]);
+      }
+    },
+    () => {},
+    { enableHighAccuracy: true, maximumAge: 3000, timeout: 10000 }
+  );
+}
+
+function _onFollowClick() {
+  isFollowing = true;
+  _updateFollowBtn();
+  if (lastPos) {
+    isProgrammaticMove = true;
+    map.setView(lastPos, Math.max(map.getZoom(), 16), { animate: true });
+  }
+}
+
+function _updateFollowBtn() {
+  const btn = document.getElementById('btn-follow');
+  if (!btn) return;
+  btn.textContent = isFollowing ? '◎' : '📍';
+  btn.classList.toggle('active', isFollowing);
+  btn.title = isFollowing ? 'Слежение включено' : 'Вернуться к моей позиции';
 }
 
 // ── СИНЯЯ ТОЧКА ПОЛЬЗОВАТЕЛЯ ──────────────────────────────────────

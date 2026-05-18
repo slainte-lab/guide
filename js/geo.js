@@ -36,15 +36,11 @@ function stopGPS() {
   }
   gpsActive = false;
   _setGPSBtn(false);
-  clearUserMarker();
   showToast('GPS отключён');
 }
 
 function _onPosition(pos) {
   const { latitude: lat, longitude: lng } = pos.coords;
-
-  // Синяя точка на карте (только если карта уже открыта)
-  updateUserMarker(lat, lng);
 
   // Проверяем близость к каждой остановке
   STOPS.forEach((s, i) => {
