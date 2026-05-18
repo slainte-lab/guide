@@ -1,0 +1,7 @@
+{
+  "name": "audiogide-tools",
+  "private": true,
+  "dependencies": {
+    "msedge-tts": "*"
+  }
+}
