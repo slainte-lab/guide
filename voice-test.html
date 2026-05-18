@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Тест голосов</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #111010; --card: #1C1B18; --card2: #242320;
+  --text: #E8E4DC; --muted: #8A8070; --border: #2E2B24;
+  --gold: #C9A84C; --green: #3D8C5A; --blue: #3A7AB5;
+}
+body {
+  background: var(--bg); color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  min-height: 100vh; padding: 20px;
+}
+h1 { font-size: 18px; color: var(--gold); margin-bottom: 4px; }
+.sub { font-size: 12px; color: var(--muted); margin-bottom: 20px; }
+
+.section { margin-bottom: 24px; }
+.section-title { font-size: 11px; color: var(--muted); text-transform: uppercase;
+  letter-spacing: .06em; margin-bottom: 8px; }
+
+textarea {
+  width: 100%; min-height: 90px; background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 10px 12px; color: var(--text); font-size: 13px;
+  line-height: 1.6; resize: vertical; font-family: inherit;
+}
+
+.sliders { display: flex; gap: 16px; margin-top: 10px; flex-wrap: wrap; }
+.slider-row { flex: 1; min-width: 140px; }
+.slider-label { font-size: 11px; color: var(--muted); margin-bottom: 4px;
+  display: flex; justify-content: space-between; }
+input[type=range] { width: 100%; accent-color: var(--gold); cursor: pointer; }
+
+.voices { display: flex; flex-direction: column; gap: 6px; }
+.voice-row {
+  display: flex; align-items: center; gap: 10px;
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 10px 12px;
+  transition: border-color .15s;
+}
+.voice-row.playing { border-color: var(--gold); }
+.voice-info { flex: 1; min-width: 0; }
+.voice-name { font-size: 13px; font-weight: 500; white-space: nowrap;
+  overflow: hidden; text-overflow: ellipsis; }
+.voice-meta { font-size: 11px; color: var(--muted); margin-top: 2px; }
+.badge {
+  font-size: 10px; padding: 2px 7px; border-radius: 8px; flex-shrink: 0;
+  white-space: nowrap;
+}
+.badge-google   { background: #0F2A18; color: #7ABF7A; }
+.badge-ms       { background: #0E2235; color: #7BB8E8; }
+.badge-apple    { background: #1E1033; color: #A78BFA; }
+.badge-local    { background: #2A1F08; color: #C8A84C; }
+.badge-other    { background: #1E1E1E; color: #888; }
+
+.btn-play-voice {
+  background: var(--card2); border: 1px solid var(--border);
+  border-radius: 8px; color: var(--text); font-size: 12px;
+  padding: 6px 12px; cursor: pointer; flex-shrink: 0;
+  transition: background .15s, border-color .15s;
+  white-space: nowrap;
+}
+.btn-play-voice:hover { border-color: var(--gold); }
+.voice-row.playing .btn-play-voice {
+  background: #2A1F00; border-color: var(--gold); color: var(--gold);
+}
+
+.no-voices { color: var(--muted); font-size: 13px; padding: 12px;
+  background: var(--card); border-radius: 10px; }
+
+.group-label {
+  font-size: 11px; color: var(--muted); padding: 4px 0 2px;
+  border-bottom: 1px solid var(--border); margin-bottom: 4px;
+}
+
+#status { margin-top: 12px; font-size: 12px; color: var(--muted); min-height: 18px; }
+</style>
+</head>
+<body>
+
+<h1>Тест голосов Web Speech API</h1>
+<p class="sub">Нажмите ▶ у голоса, чтобы прослушать. Сначала идут русские голоса, потом остальные.</p>
+
+<div class="section">
+  <div class="section-title">Текст для теста</div>
+  <textarea id="sample">Добро пожаловать в Брюгге. Этому городу более восьмисот лет — и он почти нетронут временем. Перед вами Гроте Маркт, Главная рыночная площадь. В центре — бронзовая статуя Яна Брейделя и Питера де Конинка.</textarea>
+  <div class="sliders">
+    <div class="slider-row">
+      <div class="slider-label">
+        <span>Скорость</span><span id="rate-val">0.85</span>
+      </div>
+      <input type="range" id="rate" min="0.5" max="1.5" step="0.05" value="0.85"
+             oninput="document.getElementById('rate-val').textContent=this.value">
+    </div>
+    <div class="slider-row">
+      <div class="slider-label">
+        <span>Тон</span><span id="pitch-val">0.94</span>
+      </div>
+      <input type="range" id="pitch" min="0.5" max="1.5" step="0.02" value="0.94"
+             oninput="document.getElementById('pitch-val').textContent=this.value">
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">Доступные голоса</div>
+  <div class="voices" id="voices-list"><div class="no-voices">Загружаем список голосов…</div></div>
+  <div id="status"></div>
+</div>
+
+<script>
+let currentUtterance = null;
+let playingRow = null;
+
+function badgeFor(voice) {
+  const n = voice.name;
+  if (n.includes('Google'))                           return ['Google онлайн', 'badge-google'];
+  if (n.includes('Microsoft') && n.includes('Neural'))return ['Microsoft Neural', 'badge-ms'];
+  if (n.includes('Microsoft'))                        return ['Microsoft', 'badge-ms'];
+  if (/Milena|Katya|Anna|Siri/i.test(n))             return ['Apple', 'badge-apple'];
+  if (voice.localService)                             return ['Локальный', 'badge-local'];
+  return ['Прочее', 'badge-other'];
+}
+
+function stopCurrent() {
+  speechSynthesis.cancel();
+  if (playingRow) { playingRow.classList.remove('playing'); playingRow = null; }
+  document.getElementById('status').textContent = '';
+}
+
+function playVoice(voice, row) {
+  stopCurrent();
+  const text  = document.getElementById('sample').value.trim();
+  const rate  = parseFloat(document.getElementById('rate').value);
+  const pitch = parseFloat(document.getElementById('pitch').value);
+  if (!text) return;
+
+  const utt  = new SpeechSynthesisUtterance(text);
+  utt.voice  = voice;
+  utt.lang   = voice.lang;
+  utt.rate   = rate;
+  utt.pitch  = pitch;
+
+  utt.onstart = () => {
+    row.classList.add('playing');
+    playingRow = row;
+    row.querySelector('.btn-play-voice').textContent = '■ Стоп';
+    document.getElementById('status').textContent = '▶ ' + voice.name;
+  };
+  utt.onend = utt.onerror = () => {
+    row.classList.remove('playing');
+    row.querySelector('.btn-play-voice').textContent = '▶ Слушать';
+    if (playingRow === row) playingRow = null;
+    document.getElementById('status').textContent = '';
+  };
+
+  currentUtterance = utt;
+  speechSynthesis.speak(utt);
+}
+
+function renderVoices() {
+  const all    = speechSynthesis.getVoices();
+  const ru     = all.filter(v => v.lang.startsWith('ru'));
+  const others = all.filter(v => !v.lang.startsWith('ru'));
+
+  const list = document.getElementById('voices-list');
+  list.innerHTML = '';
+
+  if (all.length === 0) {
+    list.innerHTML = '<div class="no-voices">Голоса не найдены. Попробуйте в Chrome или Safari.</div>';
+    return;
+  }
+
+  function makeRow(voice) {
+    const [badgeText, badgeClass] = badgeFor(voice);
+    const row = document.createElement('div');
+    row.className = 'voice-row';
+    row.innerHTML = `
+      <div class="voice-info">
+        <div class="voice-name">${voice.name}</div>
+        <div class="voice-meta">${voice.lang} · ${voice.localService ? 'локальный' : 'онлайн'}</div>
+      </div>
+      <span class="badge ${badgeClass}">${badgeText}</span>
+      <button class="btn-play-voice">▶ Слушать</button>`;
+    row.querySelector('.btn-play-voice').addEventListener('click', () => {
+      if (row.classList.contains('playing')) { stopCurrent(); return; }
+      playVoice(voice, row);
+    });
+    return row;
+  }
+
+  if (ru.length > 0) {
+    const gl = document.createElement('div');
+    gl.className = 'group-label';
+    gl.textContent = `Русские голоса (${ru.length})`;
+    list.appendChild(gl);
+    ru.forEach(v => list.appendChild(makeRow(v)));
+  }
+
+  if (others.length > 0) {
+    const gl = document.createElement('div');
+    gl.className = 'group-label';
+    gl.style.marginTop = '12px';
+    gl.textContent = `Остальные голоса (${others.length})`;
+    list.appendChild(gl);
+    others.forEach(v => list.appendChild(makeRow(v)));
+  }
+}
+
+if (speechSynthesis.getVoices().length > 0) {
+  renderVoices();
+} else {
+  speechSynthesis.addEventListener('voiceschanged', renderVoices, { once: true });
+  // Fallback: на некоторых браузерах voiceschanged не стреляет — пробуем через 1с
+  setTimeout(() => {
+    if (document.getElementById('voices-list').children.length === 1) renderVoices();
+  }, 1000);
+}
+</script>
+</body>
+</html>
