@@ -86,11 +86,8 @@ function toggleFacts() {
   const s = STOPS[cur];
   document.getElementById('pl-text').textContent = factsMode ? s.facts : s.text;
   document.getElementById('btn-facts').classList.toggle('on', factsMode);
-  // Если аудио играло — перезапускаем с новым текстом
-  if (speaking || isPaused) {
-    stopSpeak();
-    startSpeak();
-  }
+  stopSpeak();
+  if (factsMode) startSpeak();
 }
 
 // ── НАВИГАЦИЯ ─────────────────────────────────────────────────────
