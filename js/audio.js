@@ -37,7 +37,7 @@ function startSpeak() {
   const text = isFactsNow ? STOPS[cur].facts : STOPS[cur].text;
 
   _useTTS = false;
-  _audio  = new Audio(`data/audio/stop_${cur}_${type}.mp3`);
+  _audio  = new Audio(`data/audio/${STOPS[cur].id}_${type}.mp3`);
 
   _audio.onplay  = () => { speaking = true;  isPaused = false; _updatePlayBtn(); };
   _audio.onpause = () => {
