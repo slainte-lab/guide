@@ -56,7 +56,12 @@ function resumeSpeak() {
 
 function stopSpeak() {
   speaking = false; isPaused = false;
-  if (_audio) { _audio.pause(); _audio.src = ''; _audio = null; }
+  if (_audio) {
+    _audio.onplay = _audio.onpause = _audio.onended = _audio.onerror = null;
+    _audio.pause();
+    _audio.src = '';
+    _audio = null;
+  }
   _updatePlayBtn();
 }
 
