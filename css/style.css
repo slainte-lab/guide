@@ -48,6 +48,12 @@ html, body {
   transition: color .15s;
 }
 .btn-back:active { color: var(--gold); }
+.btn-back-inline {
+  font-size: 15px;
+  color: var(--muted);
+  text-decoration: none;
+}
+.btn-back-inline:active { color: var(--gold); }
 
 /* ─── HOME PAGE ─── */
 body.home {
