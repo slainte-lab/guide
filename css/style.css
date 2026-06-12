@@ -377,8 +377,8 @@ body.home {
 }
 
 .btn-gps {
-  width: 34px;
   height: 34px;
+  padding: 0 10px;
   background: var(--card2);
   border: 1px solid var(--border);
   border-radius: 8px;
@@ -388,10 +388,15 @@ body.home {
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 6px;
   transition: background .2s, border-color .2s;
   flex-shrink: 0;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
+}
+.btn-gps-label {
+  font-size: 12px;
+  white-space: nowrap;
 }
 .btn-gps.on {
   background: #0E2235;

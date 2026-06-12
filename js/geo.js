@@ -69,8 +69,8 @@ function _setGPSBtn(on) {
   const btn = document.getElementById('btn-gps');
   if (!btn) return;
   btn.classList.toggle('on', on);
-  btn.title     = on ? 'GPS активен — нажмите для отключения' : 'Включить GPS-автогид';
-  btn.textContent = on ? '📡' : '📍';
+  btn.title = on ? 'GPS активен — нажмите для отключения' : 'Включить GPS-автогид';
+  btn.innerHTML = `${on ? '📡' : '📍'}<span class="btn-gps-label">Автоследование</span>`;
 }
 
 function _dist(lat1, lng1, lat2, lng2) {
