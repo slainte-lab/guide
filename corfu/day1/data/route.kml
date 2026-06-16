@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document>
+  <name>Corfu — Day1</name>
+  <open>1</open>
+
+  <Style id="badge_h">
+    <IconStyle>
+      <scale>1.1</scale>
+      <Icon><href>https://maps.google.com/mapfiles/ms/icons/purple-dot.png</href></Icon>
+    </IconStyle>
+    <LabelStyle><scale>0.85</scale></LabelStyle>
+  </Style>
+  <Style id="badge_s">
+    <IconStyle>
+      <scale>1.1</scale>
+      <Icon><href>https://maps.google.com/mapfiles/ms/icons/blue-dot.png</href></Icon>
+    </IconStyle>
+    <LabelStyle><scale>0.85</scale></LabelStyle>
+  </Style>
+  <Style id="badge_f">
+    <IconStyle>
+      <scale>1.1</scale>
+      <Icon><href>https://maps.google.com/mapfiles/ms/icons/orange-dot.png</href></Icon>
+    </IconStyle>
+    <LabelStyle><scale>0.85</scale></LabelStyle>
+  </Style>
+
+  <Placemark>
+    <name>Маршрут</name>
+    <Style>
+      <LineStyle><color>ff2266cc</color><width>3</width></LineStyle>
+      <PolyStyle><fill>0</fill></PolyStyle>
+    </Style>
+    <LineString>
+      <tessellate>1</tessellate>
+      <coordinates>19.9217,39.625,0 19.9229,39.6249,0 19.9214,39.6244,0 19.9202,39.6271,0</coordinates>
+    </LineString>
+  </Placemark>
+
+  <Placemark>
+    <name>1. Заселение</name>
+    <description><![CDATA[Отель Aristotelous · Старый город<br/>⏰ 20:00<br/>Отель]]></description>
+    <styleUrl>#badge_h</styleUrl>
+    <Point><coordinates>19.9217,39.625,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>2. Площадь Спианада</name>
+    <description><![CDATA[Крупнейшая площадь Балкан<br/>⏰ 20:30<br/>Площадь]]></description>
+    <styleUrl>#badge_s</styleUrl>
+    <Point><coordinates>19.9229,39.6249,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>3. Листон</name>
+    <description><![CDATA[Венецианские аркады · кофе и вино<br/>⏰ 21:00<br/>Кафе · аперитив]]></description>
+    <styleUrl>#badge_f</styleUrl>
+    <Point><coordinates>19.9214,39.6244,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>4. Кампьелло</name>
+    <description><![CDATA[Венецианские переулки · ужин<br/>⏰ 21:30<br/>Ужин]]></description>
+    <styleUrl>#badge_f</styleUrl>
+    <Point><coordinates>19.9202,39.6271,0</coordinates></Point>
+  </Placemark>
+</Document>
+</kml>

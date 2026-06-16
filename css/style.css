@@ -112,6 +112,7 @@ body.home {
 .ctag-s     { background: #1A2E45; color: #7BB8E8; }
 .ctag-b     { background: #0F2A18; color: #7ABF7A; }
 .ctag-f     { background: #2A1A08; color: #E8A870; }
+.ctag-p     { background: #082A2A; color: #5DD8D8; }
 .city-arr   { font-size: 24px; color: var(--muted); flex-shrink: 0; }
 
 /* ─── HEADER ─── */
@@ -285,6 +286,7 @@ body.home {
 .tag-b { background: #0F2A18; color: #7ABF7A; }
 .tag-f { background: #2A1A08; color: #E8A870; }
 .tag-h { background: #1E1033; color: #A78BFA; }
+.tag-p { background: #082A2A; color: #5DD8D8; }
 
 .stop-arr { color: var(--muted); font-size: 16px; margin-left: 4px; }
 .stop.cur .stop-arr { color: var(--gold); }

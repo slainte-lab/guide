@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document>
+  <name>Corfu — Day3</name>
+  <open>1</open>
+
+  <Style id="badge_s">
+    <IconStyle>
+      <scale>1.1</scale>
+      <Icon><href>https://maps.google.com/mapfiles/ms/icons/blue-dot.png</href></Icon>
+    </IconStyle>
+    <LabelStyle><scale>0.85</scale></LabelStyle>
+  </Style>
+  <Style id="badge_p">
+    <IconStyle>
+      <scale>1.1</scale>
+      <Icon><href>https://maps.google.com/mapfiles/ms/icons/blue-dot.png</href></Icon>
+    </IconStyle>
+    <LabelStyle><scale>0.85</scale></LabelStyle>
+  </Style>
+
+
+  <Placemark>
+    <name>1. Автобус на Палеокастрицу</name>
+    <description><![CDATA[Площадь Сан-Рокко · линия 11<br/>⏰ 09:00<br/>Автобус]]></description>
+    <styleUrl>#badge_s</styleUrl>
+    <Point><coordinates>19.917,39.622,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>2. Палеокастрица</name>
+    <description><![CDATA[Главный пляж · аренда лодки<br/>⏰ 10:00<br/>Пляж · лодки]]></description>
+    <styleUrl>#badge_p</styleUrl>
+    <Point><coordinates>19.7505,39.6726,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>3. La Grotta</name>
+    <description><![CDATA[Морская пещера · синяя вода<br/>⏰ 11:30<br/>Пещера]]></description>
+    <styleUrl>#badge_s</styleUrl>
+    <Point><coordinates>19.7492,39.6718,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>4. Монастырь Теотокос</name>
+    <description><![CDATA[На холме · вид на все бухты<br/>⏰ 13:30<br/>Монастырь]]></description>
+    <styleUrl>#badge_s</styleUrl>
+    <Point><coordinates>19.745,39.6754,0</coordinates></Point>
+  </Placemark>
+</Document>
+</kml>

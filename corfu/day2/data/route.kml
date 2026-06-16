@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document>
+  <name>Corfu — Day2</name>
+  <open>1</open>
+
+  <Style id="badge_p">
+    <IconStyle>
+      <scale>1.1</scale>
+      <Icon><href>https://maps.google.com/mapfiles/ms/icons/blue-dot.png</href></Icon>
+    </IconStyle>
+    <LabelStyle><scale>0.85</scale></LabelStyle>
+  </Style>
+  <Style id="badge_s">
+    <IconStyle>
+      <scale>1.1</scale>
+      <Icon><href>https://maps.google.com/mapfiles/ms/icons/blue-dot.png</href></Icon>
+    </IconStyle>
+    <LabelStyle><scale>0.85</scale></LabelStyle>
+  </Style>
+  <Style id="badge_f">
+    <IconStyle>
+      <scale>1.1</scale>
+      <Icon><href>https://maps.google.com/mapfiles/ms/icons/orange-dot.png</href></Icon>
+    </IconStyle>
+    <LabelStyle><scale>0.85</scale></LabelStyle>
+  </Style>
+
+  <Placemark>
+    <name>Маршрут</name>
+    <Style>
+      <LineStyle><color>ff2266cc</color><width>3</width></LineStyle>
+      <PolyStyle><fill>0</fill></PolyStyle>
+    </Style>
+    <LineString>
+      <tessellate>1</tessellate>
+      <coordinates>19.9242,39.6131,0 19.9272,39.6231,0 19.9213,39.6262,0 19.9214,39.6244,0 19.9202,39.6271,0 19.9175,39.6286,0</coordinates>
+    </LineString>
+  </Placemark>
+
+  <Placemark>
+    <name>1. Пляж Кардаки</name>
+    <description><![CDATA[Утреннее купание · 20 мин пешком<br/>⏰ 09:00<br/>Пляж]]></description>
+    <styleUrl>#badge_p</styleUrl>
+    <Point><coordinates>19.9242,39.6131,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>2. Старая крепость</name>
+    <description><![CDATA[Венецианская цитадель · вид на залив<br/>⏰ 11:30<br/>Крепость · €6]]></description>
+    <styleUrl>#badge_s</styleUrl>
+    <Point><coordinates>19.9272,39.6231,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>3. Церковь Св. Спиридона</name>
+    <description><![CDATA[Покровитель Корфу · мощи святого<br/>⏰ 13:00<br/>Церковь]]></description>
+    <styleUrl>#badge_s</styleUrl>
+    <Point><coordinates>19.9213,39.6262,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>4. Обед</name>
+    <description><![CDATA[Листон или переулки рядом<br/>⏰ 14:00<br/>Обед]]></description>
+    <styleUrl>#badge_f</styleUrl>
+    <Point><coordinates>19.9214,39.6244,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>5. Кампьелло</name>
+    <description><![CDATA[Венецианский квартал · переулки<br/>⏰ 17:00<br/>Квартал]]></description>
+    <styleUrl>#badge_s</styleUrl>
+    <Point><coordinates>19.9202,39.6271,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>6. Новая крепость</name>
+    <description><![CDATA[Вид на залив и Старый город<br/>⏰ 18:30<br/>Крепость · €3]]></description>
+    <styleUrl>#badge_s</styleUrl>
+    <Point><coordinates>19.9175,39.6286,0</coordinates></Point>
+  </Placemark>
+</Document>
+</kml>

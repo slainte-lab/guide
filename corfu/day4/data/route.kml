@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document>
+  <name>Corfu — Day4</name>
+  <open>1</open>
+
+  <Style id="badge_p">
+    <IconStyle>
+      <scale>1.1</scale>
+      <Icon><href>https://maps.google.com/mapfiles/ms/icons/blue-dot.png</href></Icon>
+    </IconStyle>
+    <LabelStyle><scale>0.85</scale></LabelStyle>
+  </Style>
+  <Style id="badge_s">
+    <IconStyle>
+      <scale>1.1</scale>
+      <Icon><href>https://maps.google.com/mapfiles/ms/icons/blue-dot.png</href></Icon>
+    </IconStyle>
+    <LabelStyle><scale>0.85</scale></LabelStyle>
+  </Style>
+
+
+  <Placemark>
+    <name>1. Canal d'Amour</name>
+    <description><![CDATA[Сидари · канал в скалах<br/>⏰ 10:00<br/>Пляж]]></description>
+    <styleUrl>#badge_p</styleUrl>
+    <Point><coordinates>19.7133,39.7756,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>2. Афионас</name>
+    <description><![CDATA[Начало хайка к Porto Timoni<br/>⏰ 12:30<br/>Деревня]]></description>
+    <styleUrl>#badge_s</styleUrl>
+    <Point><coordinates>19.7012,39.721,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>3. Porto Timoni</name>
+    <description><![CDATA[Двойная бухта · лучший вид острова<br/>⏰ 13:00<br/>Пляж]]></description>
+    <styleUrl>#badge_p</styleUrl>
+    <Point><coordinates>19.6986,39.7197,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>4. Трон Кайзера</name>
+    <description><![CDATA[Пелекас · закат ~20:30<br/>⏰ 19:30<br/>Закат]]></description>
+    <styleUrl>#badge_s</styleUrl>
+    <Point><coordinates>19.8398,39.6314,0</coordinates></Point>
+  </Placemark>
+</Document>
+</kml>
