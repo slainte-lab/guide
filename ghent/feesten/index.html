@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>🎪 Gentse Feesten 2026</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
+<link rel="stylesheet" href="../../css/style.css"/>
+</head>
+<body>
+
+<div class="hdr">
+  <div class="hdr-row">
+    <div class="hdr-left">
+      <a href="../" class="btn-back" title="Гент">‹</a>
+      <div>
+        <div class="hdr-title">🎪 Gentse Feesten 2026</div>
+        <div class="hdr-sub">Июль · 10 дней · 4 площадки · бесплатно</div>
+      </div>
+    </div>
+    <div class="hdr-count"><b id="vcount">0</b>/<span id="stop-total"></span> посещено</div>
+  </div>
+  <div class="hdr-btns">
+    <a class="btn-mapsall" id="btn-mapsall" href="#" target="_blank" rel="noopener" title="Открыть площадки в Google Maps">🗺</a>
+    <button id="btn-offline" class="btn-offline" onclick="precacheAudio()" title="Скачать аудио для офлайн">💾<span class="btn-offline-label">Офлайн</span></button>
+    <button id="btn-gps" class="btn-gps" onclick="toggleGPS()" title="Включить GPS-автогид">📍<span class="btn-gps-label">Навигация</span></button>
+  </div>
+  <div class="prog"><div class="prog-fill" id="prog"></div></div>
+</div>
+
+<div class="tabs">
+  <div class="tab-btn active" onclick="showTab('g')">🎧 Гид</div>
+  <div class="tab-btn" onclick="showTab('m')">🗺 Карта</div>
+</div>
+
+<div class="view show" id="view-g">
+  <div class="stops" id="slist"></div>
+  <div class="player">
+    <div class="pl-loc" id="pl-loc">Выберите площадку ниже</div>
+    <div class="pl-title" id="pl-title">Нажмите на площадку, чтобы узнать подробнее</div>
+    <div class="pl-text" id="pl-text">Gentse Feesten — десять дней городского фестиваля в июле. Большинство мероприятий бесплатны. Между площадками — свободное передвижение. День: театр и цирк. Вечер: живая музыка у воды. Ночь: DJ на главной площади.</div>
+    <div class="pl-walk" id="pl-walk">
+      <span>🚶 <span id="wtime"></span></span>
+      <span>📍 <span id="wdist"></span></span>
+    </div>
+    <div class="pl-controls">
+      <button class="btn btn-nav" onclick="go(-1)" id="bprev">◀</button>
+      <button class="btn btn-play" onclick="togglePlay()" id="bplay">▶ Слушать</button>
+      <button class="btn btn-nav" onclick="go(1)" id="bnext">▶</button>
+      <button class="btn btn-done" onclick="markDone()" title="Отметить посещённой">✓</button>
+      <a class="btn btn-map" id="btn-map" href="#" target="_blank" rel="noopener" title="Открыть в Google Maps">📍</a>
+      <button class="btn btn-facts" onclick="toggleFacts()" id="btn-facts" title="О площадке подробнее" disabled>💡</button>
+    </div>
+  </div>
+</div>
+
+<div class="view" id="view-m">
+  <div id="map"></div>
+</div>
+
+<div id="toast"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="data/stops.js"></script>
+<script src="../../js/map.js"></script>
+<script src="../../js/audio.js"></script>
+<script src="../../js/geo.js"></script>
+<script src="../../js/app.js"></script>
+<script src="../../js/offline.js"></script>
+</body>
+</html>
