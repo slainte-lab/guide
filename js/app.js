@@ -146,10 +146,10 @@ function _updateMapBtn(lat, lng) {
 document.getElementById('stop-total').textContent = STOPS.length;
 const _mapsAllBtn = document.getElementById('btn-mapsall');
 if (_mapsAllBtn) {
-  // Вычисляем абсолютный URL KML-файла для текущего города
-  const _pageBase = location.href.replace(/index\.html([?#].*)?$/, '').replace(/[?#].*$/, '');
-  const _kmlUrl   = _pageBase + 'data/route.kml';
-  _mapsAllBtn.href = 'https://www.google.com/maps?q=' + encodeURIComponent(_kmlUrl);
+  // Если для города есть My Maps ссылка — используем её, иначе directions
+  _mapsAllBtn.href = typeof MYMAPS_URL !== 'undefined'
+    ? MYMAPS_URL
+    : 'https://www.google.com/maps/dir/' + STOPS.map(s => s.lat + ',' + s.lng).join('/');
 }
 renderList();
 _restoreState();
