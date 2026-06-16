@@ -12,6 +12,7 @@ let isProgrammaticMove = false; // флаг: движение из кода, н�
 let lastPos          = null;   // последняя известная позиция [lat, lng]
 
 const BADGE_COLORS = { s: '#4A90D9', b: '#3D8C5A', f: '#C87A30', h: '#7C3AED' };
+const BADGE_ICONS  = { s: '🏛', b: '🍺', f: '🍽', h: '🏨' };
 
 function initMap() {
   const centerLat = STOPS.reduce((s, p) => s + p.lat, 0) / STOPS.length;
@@ -81,18 +82,26 @@ function initMap() {
 }
 
 function makeIcon(i, s, isActive, isDone) {
-  const c = isActive ? '#C9A84C' : isDone ? '#3D8C5A' : (BADGE_COLORS[s.badge] || '#C9A84C');
-  const sz = isActive ? 32 : 28;
-  const isHotel = s.badge === 'h' && !isActive && !isDone;
-  const label = isDone && !isActive ? '✓' : isHotel ? '🏨' : String(i + 1);
-  const textColor = isActive ? '#000' : '#fff';
-  const radius = isHotel ? '6px' : '50%';
-  const fontSize = isHotel ? '15px' : (isActive ? 13 : 11) + 'px';
+  const color = isActive ? '#C9A84C' : isDone ? '#888' : (BADGE_COLORS[s.badge] || '#C9A84C');
+  const sz    = isActive ? 34 : 30;
+  const emoji = BADGE_ICONS[s.badge] || '📍';
+  const cnt   = isDone && !isActive ? '✓' : emoji;
+  const fs    = isDone && !isActive ? '13px' : (isActive ? '18px' : '15px');
+  const bdr   = isActive ? '3px solid #fff' : '2px solid rgba(255,255,255,0.8)';
+  const shd   = isActive ? '0 2px 10px rgba(0,0,0,.65)' : '0 2px 5px rgba(0,0,0,.4)';
+
+  const labelHtml = isActive
+    ? `<div style="position:absolute;top:${Math.floor((sz-20)/2)}px;left:${sz+6}px;background:${color};color:#fff;padding:1px 8px;border-radius:10px;font-size:11.5px;font-weight:700;white-space:nowrap;box-shadow:0 1px 5px rgba(0,0,0,.35);line-height:20px;pointer-events:none">${s.n}</div>`
+    : '';
+
   return L.divIcon({
-    html: `<div style="width:${sz}px;height:${sz}px;background:${c};border-radius:${radius};border:${isActive ? 3 : 2}px solid #fff;display:flex;align-items:center;justify-content:center;font-size:${fontSize};font-weight:700;color:${textColor};box-shadow:0 2px 8px rgba(0,0,0,.6)">${label}</div>`,
+    html: `<div style="position:relative;overflow:visible;width:${sz}px;height:${sz}px">
+      <div style="width:${sz}px;height:${sz}px;background:${color};border-radius:50%;border:${bdr};display:flex;align-items:center;justify-content:center;font-size:${fs};box-shadow:${shd}">${cnt}</div>
+      ${labelHtml}
+    </div>`,
     className: '',
-    iconSize: [sz, sz],
-    iconAnchor: [sz / 2, sz / 2]
+    iconSize:   [0, 0],
+    iconAnchor: [sz >> 1, sz >> 1]
   });
 }
 
@@ -101,6 +110,7 @@ function updateMapMarkers() {
   lmarkers.forEach((m, i) => {
     const s = STOPS[i];
     m.setIcon(makeIcon(i, s, i === cur, done.has(i) && i !== cur));
+    m.setZIndexOffset(i === cur ? 1000 : 0);
   });
 }
 
