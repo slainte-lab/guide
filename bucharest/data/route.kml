@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document>
+  <name>Bucharest</name>
+  <open>1</open>
+
+  <Style id="badge_h">
+    <IconStyle>
+      <scale>1.1</scale>
+      <Icon><href>https://maps.google.com/mapfiles/ms/icons/purple-dot.png</href></Icon>
+    </IconStyle>
+    <LabelStyle><scale>0.85</scale></LabelStyle>
+  </Style>
+  <Style id="badge_s">
+    <IconStyle>
+      <scale>1.1</scale>
+      <Icon><href>https://maps.google.com/mapfiles/ms/icons/blue-dot.png</href></Icon>
+    </IconStyle>
+    <LabelStyle><scale>0.85</scale></LabelStyle>
+  </Style>
+  <Style id="badge_f">
+    <IconStyle>
+      <scale>1.1</scale>
+      <Icon><href>https://maps.google.com/mapfiles/ms/icons/orange-dot.png</href></Icon>
+    </IconStyle>
+    <LabelStyle><scale>0.85</scale></LabelStyle>
+  </Style>
+
+  <Placemark>
+    <name>Маршрут</name>
+    <Style>
+      <LineStyle><color>ff2266cc</color><width>3</width></LineStyle>
+      <PolyStyle><fill>0</fill></PolyStyle>
+    </Style>
+    <LineString>
+      <tessellate>1</tessellate>
+      <coordinates>26.0816,44.4473,0 26.0966,44.4394,0 26.0957,44.4404,0 26.0998,44.4329,0 26.1003,44.4324,0 26.1005,44.4327,0 26.0875,44.4275,0</coordinates>
+    </LineString>
+  </Placemark>
+
+  <Placemark>
+    <name>1. Гара де Норд · камера хранения</name>
+    <description><![CDATA[Главный вокзал · старт транзита<br/>⏰ 10:15<br/>Вокзал]]></description>
+    <styleUrl>#badge_h</styleUrl>
+    <Point><coordinates>26.0816,44.4473,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>2. Площадь Революции</name>
+    <description><![CDATA[Декабрь 1989 · последняя речь Чаушеску<br/>⏰ 11:00<br/>История]]></description>
+    <styleUrl>#badge_s</styleUrl>
+    <Point><coordinates>26.0966,44.4394,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>3. Атенеум</name>
+    <description><![CDATA[1888 · главный концертный зал страны<br/>⏰ 11:20<br/>Архитектура]]></description>
+    <styleUrl>#badge_s</styleUrl>
+    <Point><coordinates>26.0957,44.4404,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>4. Старый город · Липскань</name>
+    <description><![CDATA[Каля Викторией → пешеходный квартал<br/>⏰ 11:45<br/>Старый город]]></description>
+    <styleUrl>#badge_s</styleUrl>
+    <Point><coordinates>26.0998,44.4329,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>5. Церковь Ставрополеос</name>
+    <description><![CDATA[1724 · румынское барокко<br/>⏰ 12:15<br/>Церковь]]></description>
+    <styleUrl>#badge_s</styleUrl>
+    <Point><coordinates>26.1003,44.4324,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>6. Caru' cu Bere</name>
+    <description><![CDATA[1879 · пивной зал · обед<br/>⏰ 12:30<br/>Обед · 1879]]></description>
+    <styleUrl>#badge_f</styleUrl>
+    <Point><coordinates>26.1005,44.4327,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>7. Дворец Парламента</name>
+    <description><![CDATA[Второе по размеру здание в мире<br/>⏰ 14:30<br/>Дворец]]></description>
+    <styleUrl>#badge_s</styleUrl>
+    <Point><coordinates>26.0875,44.4275,0</coordinates></Point>
+  </Placemark>
+</Document>
+</kml>
