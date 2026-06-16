@@ -46,6 +46,7 @@ function selectStop(i) {
   factsMode = false;
   cur = i;
   const s = STOPS[i];
+  _updateMapBtn(s.lat, s.lng);
 
   document.getElementById('pl-loc').textContent   = `Остановка ${i + 1} из ${STOPS.length} · ${s.time}`;
   document.getElementById('pl-title').textContent = `${s.n} — ${s.sub}`;
@@ -136,28 +137,14 @@ function _restoreState() {
 }
 
 // ── ОТКРЫТЬ В GOOGLE MAPS ────────────────────────────────────────
-function _openUrl(url) {
-  const a = document.createElement('a');
-  a.href = url;
-  a.target = '_blank';
-  a.rel = 'noopener';
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-}
-
-function openInMaps() {
-  if (cur < 0) return;
-  const s = STOPS[cur];
-  _openUrl(`https://maps.google.com/?q=${s.lat},${s.lng}`);
-}
-
-function openAllInMaps() {
-  const coords = STOPS.map(s => s.lat + ',' + s.lng).join('/');
-  _openUrl('https://www.google.com/maps/dir/' + coords);
+function _updateMapBtn(lat, lng) {
+  const a = document.getElementById('btn-map');
+  if (a) a.href = `https://maps.google.com/?q=${lat},${lng}`;
 }
 
 // ── СТАРТ ─────────────────────────────────────────────────────────
 document.getElementById('stop-total').textContent = STOPS.length;
+const _mapsAllBtn = document.getElementById('btn-mapsall');
+if (_mapsAllBtn) _mapsAllBtn.href = 'https://www.google.com/maps/dir/' + STOPS.map(s => s.lat + ',' + s.lng).join('/');
 renderList();
 _restoreState();

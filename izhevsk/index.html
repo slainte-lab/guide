@@ -21,7 +21,7 @@
     <div class="hdr-count"><b id="vcount">0</b>/<span id="stop-total"></span> посещено</div>
   </div>
   <div class="hdr-btns">
-    <button class="btn-mapsall" onclick="openAllInMaps()" title="Открыть весь маршрут в Google Maps">🗺</button>
+    <a class="btn-mapsall" id="btn-mapsall" href="#" target="_blank" rel="noopener" title="Открыть весь маршрут в Google Maps">🗺</a>
     <button id="btn-offline" class="btn-offline" onclick="precacheAudio()" title="Скачать аудио для офлайн">💾<span class="btn-offline-label">Офлайн</span></button>
     <button id="btn-gps" class="btn-gps" onclick="toggleGPS()" title="Включить GPS-автогид">📍<span class="btn-gps-label">Автоследование</span></button>
   </div>
@@ -48,7 +48,7 @@
       <button class="btn btn-play" onclick="togglePlay()" id="bplay">▶ Слушать</button>
       <button class="btn btn-nav" onclick="go(1)" id="bnext">▶</button>
       <button class="btn btn-done" onclick="markDone()" title="Отметить посещённым">✓</button>
-      <button class="btn btn-map" onclick="openInMaps()" title="Открыть в Google Maps">📍</button>
+      <a class="btn btn-map" id="btn-map" href="#" target="_blank" rel="noopener" title="Открыть в Google Maps">📍</a>
       <button class="btn btn-facts" onclick="toggleFacts()" id="btn-facts" title="Интересные факты" disabled>💡</button>
     </div>
   </div>

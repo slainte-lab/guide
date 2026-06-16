@@ -469,7 +469,9 @@ body.home {
   -webkit-appearance: none;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
+  text-decoration: none;
 }
+a.btn { text-decoration: none; }
 .btn-mapsall:active { opacity: .7; }
 
 .btn-gps.on {
