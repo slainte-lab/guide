@@ -136,15 +136,25 @@ function _restoreState() {
 }
 
 // ── ОТКРЫТЬ В GOOGLE MAPS ────────────────────────────────────────
+function _openUrl(url) {
+  const a = document.createElement('a');
+  a.href = url;
+  a.target = '_blank';
+  a.rel = 'noopener';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+}
+
 function openInMaps() {
   if (cur < 0) return;
   const s = STOPS[cur];
-  window.open(`https://maps.google.com/?q=${s.lat},${s.lng}`, '_blank');
+  _openUrl(`https://maps.google.com/?q=${s.lat},${s.lng}`);
 }
 
 function openAllInMaps() {
   const coords = STOPS.map(s => s.lat + ',' + s.lng).join('/');
-  window.open('https://www.google.com/maps/dir/' + coords, '_blank');
+  _openUrl('https://www.google.com/maps/dir/' + coords);
 }
 
 // ── СТАРТ ─────────────────────────────────────────────────────────
