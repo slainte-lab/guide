@@ -142,6 +142,11 @@ function openInMaps() {
   window.open(`https://maps.google.com/?q=${s.lat},${s.lng}`, '_blank');
 }
 
+function openAllInMaps() {
+  const coords = STOPS.map(s => s.lat + ',' + s.lng).join('/');
+  window.open('https://www.google.com/maps/dir/' + coords, '_blank');
+}
+
 // ── СТАРТ ─────────────────────────────────────────────────────────
 document.getElementById('stop-total').textContent = STOPS.length;
 renderList();

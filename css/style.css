@@ -454,6 +454,24 @@ body.home {
 .btn-offline:disabled { opacity: .6; cursor: default; }
 .btn-offline:not(:disabled):active { opacity: .7; }
 
+.btn-mapsall {
+  height: 30px;
+  padding: 0 9px;
+  background: var(--card2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--muted);
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  -webkit-appearance: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.btn-mapsall:active { opacity: .7; }
+
 .btn-gps.on {
   background: #0E2235;
   border-color: #4A90D9;
