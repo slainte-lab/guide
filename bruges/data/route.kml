@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document>
+  <name>Bruges</name>
+  <open>1</open>
+
+  <Style id="badge_s">
+    <IconStyle>
+      <scale>1.1</scale>
+      <Icon><href>https://maps.google.com/mapfiles/ms/icons/blue-dot.png</href></Icon>
+    </IconStyle>
+    <LabelStyle><scale>0.85</scale></LabelStyle>
+  </Style>
+  <Style id="badge_f">
+    <IconStyle>
+      <scale>1.1</scale>
+      <Icon><href>https://maps.google.com/mapfiles/ms/icons/orange-dot.png</href></Icon>
+    </IconStyle>
+    <LabelStyle><scale>0.85</scale></LabelStyle>
+  </Style>
+  <Style id="badge_b">
+    <IconStyle>
+      <scale>1.1</scale>
+      <Icon><href>https://maps.google.com/mapfiles/ms/icons/green-dot.png</href></Icon>
+    </IconStyle>
+    <LabelStyle><scale>0.85</scale></LabelStyle>
+  </Style>
+
+  <Placemark>
+    <name>Маршрут</name>
+    <Style>
+      <LineStyle><color>ff2266cc</color><width>3</width></LineStyle>
+      <PolyStyle><fill>0</fill></PolyStyle>
+    </Style>
+    <LineString>
+      <tessellate>1</tessellate>
+      <coordinates>3.21639,51.19723,0 3.22381,51.2079,0 3.22412,51.20844,0 3.22662,51.20813,0 3.22787,51.20737,0 3.22418,51.20245,0 3.22194,51.20085,0</coordinates>
+    </LineString>
+  </Placemark>
+
+  <Placemark>
+    <name>1. Вокзал Брюгге</name>
+    <description><![CDATA[Начало маршрута · прибытие<br/>⏰ 12:00<br/>Старт]]></description>
+    <styleUrl>#badge_s</styleUrl>
+    <Point><coordinates>3.21639,51.19723,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>2. Обед · карбонад фламанд</name>
+    <description><![CDATA[Brasserie Erasmus · Wollestraat 35<br/>⏰ 12:15<br/>Обед]]></description>
+    <styleUrl>#badge_f</styleUrl>
+    <Point><coordinates>3.22381,51.2079,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>3. Гроте Маркт и Белфор</name>
+    <description><![CDATA[Главная площадь · колокольня 83 м<br/>⏰ 13:30<br/>ЮНЕСКО]]></description>
+    <styleUrl>#badge_s</styleUrl>
+    <Point><coordinates>3.22412,51.20844,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>4. Площадь Бург и Базилика</name>
+    <description><![CDATA[Ратуша XIV в · Святая Кровь<br/>⏰ 14:15<br/>ЮНЕСКО]]></description>
+    <styleUrl>#badge_s</styleUrl>
+    <Point><coordinates>3.22662,51.20813,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>5. Розенхоедкай</name>
+    <description><![CDATA[Набережная Розовых Шляп<br/>⏰ 14:30<br/>Лучший вид]]></description>
+    <styleUrl>#badge_s</styleUrl>
+    <Point><coordinates>3.22787,51.20737,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>6. Пивоварня Де Хальве Маан</name>
+    <description><![CDATA[Брюгсе Зот · Страффе Хендрик<br/>⏰ 15:00<br/>Пиво]]></description>
+    <styleUrl>#badge_b</styleUrl>
+    <Point><coordinates>3.22418,51.20245,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>7. Бегейнхоф и Минневатер</name>
+    <description><![CDATA[Тихий двор XIII в · Озеро любви<br/>⏰ 16:15<br/>ЮНЕСКО]]></description>
+    <styleUrl>#badge_s</styleUrl>
+    <Point><coordinates>3.22194,51.20085,0</coordinates></Point>
+  </Placemark>
+</Document>
+</kml>

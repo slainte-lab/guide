@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document>
+  <name>Paris — Day1</name>
+  <open>1</open>
+
+  <Style id="badge_s">
+    <IconStyle>
+      <scale>1.1</scale>
+      <Icon><href>https://maps.google.com/mapfiles/ms/icons/blue-dot.png</href></Icon>
+    </IconStyle>
+    <LabelStyle><scale>0.85</scale></LabelStyle>
+  </Style>
+  <Style id="badge_f">
+    <IconStyle>
+      <scale>1.1</scale>
+      <Icon><href>https://maps.google.com/mapfiles/ms/icons/orange-dot.png</href></Icon>
+    </IconStyle>
+    <LabelStyle><scale>0.85</scale></LabelStyle>
+  </Style>
+
+  <Placemark>
+    <name>Маршрут</name>
+    <Style>
+      <LineStyle><color>ff2266cc</color><width>3</width></LineStyle>
+      <PolyStyle><fill>0</fill></PolyStyle>
+    </Style>
+    <LineString>
+      <tessellate>1</tessellate>
+      <coordinates>2.3692,48.8533,0 2.3622,48.8553,0 2.3548,48.8563,0 2.3622,48.8574,0 2.3522,48.8565,0 2.3499,48.853,0 2.3466,48.8507,0 2.3376,48.8606,0 2.337,48.8655,0 2.3214,48.8654,0 2.2888,48.8621,0</coordinates>
+    </LineString>
+  </Placemark>
+
+  <Placemark>
+    <name>1. Площадь Бастилии</name>
+    <description><![CDATA[Начало маршрута · Колонна Июля<br/>⏰ 9:00<br/>Революция]]></description>
+    <styleUrl>#badge_s</styleUrl>
+    <Point><coordinates>2.3692,48.8533,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>2. Марэ и Королевская площадь</name>
+    <description><![CDATA[Отель де Сюлли · Place des Vosges · еврейский квартал<br/>⏰ 9:30<br/>История]]></description>
+    <styleUrl>#badge_s</styleUrl>
+    <Point><coordinates>2.3622,48.8553,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>3. Бутик Gentle Monster</name>
+    <description><![CDATA[48 Rue Sainte-Croix de la Bretonnerie · арт-инсталляция · 0€<br/>⏰ 10:30<br/>Арт · бесплатно]]></description>
+    <styleUrl>#badge_s</styleUrl>
+    <Point><coordinates>2.3548,48.8563,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>4. Музей Карнаваль</name>
+    <description><![CDATA[История Парижа · бесплатно · XVI–XVII век<br/>⏰ 11:00<br/>Музей · бесплатно]]></description>
+    <styleUrl>#badge_s</styleUrl>
+    <Point><coordinates>2.3622,48.8574,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>5. Гревская площадь — мэрия Парижа</name>
+    <description><![CDATA[Происхождение слова «забастовка» · место казней · Hôtel de Ville<br/>⏰ 12:30<br/>История]]></description>
+    <styleUrl>#badge_s</styleUrl>
+    <Point><coordinates>2.3522,48.8565,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>6. Остров Сите и Нотр-Дам</name>
+    <description><![CDATA[Сердце Парижа · открылся декабрь 2024 · Пон-Нёф<br/>⏰ 13:00<br/>ЮНЕСКО]]></description>
+    <styleUrl>#badge_s</styleUrl>
+    <Point><coordinates>2.3499,48.853,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>7. Обед — Латинский квартал</name>
+    <description><![CDATA[Brasserie у Сен-Мишель · formule du jour<br/>⏰ 14:00<br/>Обед]]></description>
+    <styleUrl>#badge_f</styleUrl>
+    <Point><coordinates>2.3466,48.8507,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>8. Мост Искусств и Лувр</name>
+    <description><![CDATA[Замки → пирамида · Кур Карре · Пале-Рояль<br/>⏰ 15:30<br/>Королевский Париж]]></description>
+    <styleUrl>#badge_s</styleUrl>
+    <Point><coordinates>2.3376,48.8606,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>9. Библиотека Ришелье</name>
+    <description><![CDATA[Salle Ovale · BnF · 1868 · 0€<br/>⏰ 16:30<br/>Архитектура · бесплатно]]></description>
+    <styleUrl>#badge_s</styleUrl>
+    <Point><coordinates>2.337,48.8655,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>10. Тюильри и площадь Согласия</name>
+    <description><![CDATA[Сад Ле Нотра · Луксорский обелиск · место гильотины<br/>⏰ 17:15<br/>История]]></description>
+    <styleUrl>#badge_s</styleUrl>
+    <Point><coordinates>2.3214,48.8654,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>11. Трокадеро и мерцание Эйфелевой башни</name>
+    <description><![CDATA[Лучший вид · мерцание каждый час после 22:00<br/>⏰ 22:00<br/>Мерцание]]></description>
+    <styleUrl>#badge_s</styleUrl>
+    <Point><coordinates>2.2888,48.8621,0</coordinates></Point>
+  </Placemark>
+</Document>
+</kml>

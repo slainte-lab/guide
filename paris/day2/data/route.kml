@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document>
+  <name>Paris — Day2</name>
+  <open>1</open>
+
+  <Style id="badge_s">
+    <IconStyle>
+      <scale>1.1</scale>
+      <Icon><href>https://maps.google.com/mapfiles/ms/icons/blue-dot.png</href></Icon>
+    </IconStyle>
+    <LabelStyle><scale>0.85</scale></LabelStyle>
+  </Style>
+  <Style id="badge_f">
+    <IconStyle>
+      <scale>1.1</scale>
+      <Icon><href>https://maps.google.com/mapfiles/ms/icons/orange-dot.png</href></Icon>
+    </IconStyle>
+    <LabelStyle><scale>0.85</scale></LabelStyle>
+  </Style>
+
+  <Placemark>
+    <name>Маршрут</name>
+    <Style>
+      <LineStyle><color>ff2266cc</color><width>3</width></LineStyle>
+      <PolyStyle><fill>0</fill></PolyStyle>
+    </Style>
+    <LineString>
+      <tessellate>1</tessellate>
+      <coordinates>2.3396,48.8487,0 2.3128,48.8637,0 2.301,48.8627,0 2.2946,48.859,0 2.2986,48.8641,0 2.2888,48.8621,0 2.3431,48.8867,0 2.3329,48.8841,0</coordinates>
+    </LineString>
+  </Placemark>
+
+  <Placemark>
+    <name>1. Сорбонна и Люксембургский сад</name>
+    <description><![CDATA[Латинский квартал · старейший университет · утренний сад<br/>⏰ 10:00<br/>Академический Париж]]></description>
+    <styleUrl>#badge_s</styleUrl>
+    <Point><coordinates>2.3396,48.8487,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>2. Мост Александра III и Пти-Пале</name>
+    <description><![CDATA[Avenue Winston Churchill · 1900 · два музея рядом<br/>⏰ 11:30<br/>Belle Époque]]></description>
+    <styleUrl>#badge_s</styleUrl>
+    <Point><coordinates>2.3128,48.8637,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>3. Обед — набережная Сены</name>
+    <description><![CDATA[Brasserie у площади Альма · 7-й округ<br/>⏰ 13:00<br/>Обед]]></description>
+    <styleUrl>#badge_f</styleUrl>
+    <Point><coordinates>2.301,48.8627,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>4. Марсово поле и Эйфелева башня</name>
+    <description><![CDATA[Pont d'Iéna · 1809 · вид на башню снизу<br/>⏰ 14:30<br/>Эйфель]]></description>
+    <styleUrl>#badge_s</styleUrl>
+    <Point><coordinates>2.2946,48.859,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>5. Музей современного искусства</name>
+    <description><![CDATA[MAM · Palais de Tokyo · мурал Дюфи · 0€<br/>⏰ 15:30<br/>Искусство · бесплатно]]></description>
+    <styleUrl>#badge_s</styleUrl>
+    <Point><coordinates>2.2986,48.8641,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>6. Трокадеро — дневной вид</name>
+    <description><![CDATA[Palais de Chaillot · дневная панорама Эйфелевой башни<br/>⏰ 17:00<br/>Панорама]]></description>
+    <styleUrl>#badge_s</styleUrl>
+    <Point><coordinates>2.2888,48.8621,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>7. Монмартр и базилика Сакре-Кёр</name>
+    <description><![CDATA[Холм художников · 130 м · закат<br/>⏰ 18:30<br/>Закат]]></description>
+    <styleUrl>#badge_s</styleUrl>
+    <Point><coordinates>2.3431,48.8867,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>8. Bouillon Pigalle — ужин</name>
+    <description><![CDATA[22 Bd de Clichy · классический французский буйон · €20-25<br/>⏰ 20:00<br/>Ужин]]></description>
+    <styleUrl>#badge_f</styleUrl>
+    <Point><coordinates>2.3329,48.8841,0</coordinates></Point>
+  </Placemark>
+</Document>
+</kml>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document>
+  <name>Izhevsk</name>
+  <open>1</open>
+
+  <Style id="badge_h">
+    <IconStyle>
+      <scale>1.1</scale>
+      <Icon><href>https://maps.google.com/mapfiles/ms/icons/purple-dot.png</href></Icon>
+    </IconStyle>
+    <LabelStyle><scale>0.85</scale></LabelStyle>
+  </Style>
+  <Style id="badge_s">
+    <IconStyle>
+      <scale>1.1</scale>
+      <Icon><href>https://maps.google.com/mapfiles/ms/icons/blue-dot.png</href></Icon>
+    </IconStyle>
+    <LabelStyle><scale>0.85</scale></LabelStyle>
+  </Style>
+
+  <Placemark>
+    <name>Маршрут</name>
+    <Style>
+      <LineStyle><color>ff2266cc</color><width>3</width></LineStyle>
+      <PolyStyle><fill>0</fill></PolyStyle>
+    </Style>
+    <LineString>
+      <tessellate>1</tessellate>
+      <coordinates>53.229699,56.835008,0 53.231199,56.835508,0 53.2315,56.8385,0 53.231,56.8415,0 53.229,56.8435,0 53.227699,56.834708,0</coordinates>
+    </LineString>
+  </Placemark>
+
+  <Placemark>
+    <name>1. ЖК «Ниагара»</name>
+    <description><![CDATA[Старт · ул. Василия Чугуевского, 9<br/>⏰ 12:00<br/>Старт]]></description>
+    <styleUrl>#badge_h</styleUrl>
+    <Point><coordinates>53.229699,56.835008,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>2. Перекрёсток с ул. Воровского</name>
+    <description><![CDATA[Отсюда — на север<br/>⏰ 12:08<br/>Точка 2]]></description>
+    <styleUrl>#badge_s</styleUrl>
+    <Point><coordinates>53.231199,56.835508,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>3. По улице Воровского — на север</name>
+    <description><![CDATA[Частный сектор · середина подъёма<br/>⏰ 12:18<br/>Точка 3]]></description>
+    <styleUrl>#badge_s</styleUrl>
+    <Point><coordinates>53.2315,56.8385,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>4. Удмуртская, 161а</name>
+    <description><![CDATA[Ул. Удмуртская · северная часть маршрута<br/>⏰ 12:28<br/>Точка 4]]></description>
+    <styleUrl>#badge_s</styleUrl>
+    <Point><coordinates>53.231,56.8415,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>5. Удмуртская, 202</name>
+    <description><![CDATA[Северная точка маршрута<br/>⏰ 12:36<br/>Точка 5]]></description>
+    <styleUrl>#badge_s</styleUrl>
+    <Point><coordinates>53.229,56.8435,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>6. Двор у дома</name>
+    <description><![CDATA[Возвращение · конец маршрута<br/>⏰ 12:50<br/>Финал]]></description>
+    <styleUrl>#badge_s</styleUrl>
+    <Point><coordinates>53.227699,56.834708,0</coordinates></Point>
+  </Placemark>
+</Document>
+</kml>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document>
+  <name>Ghent — Feesten</name>
+  <open>1</open>
+
+  <Style id="badge_s">
+    <IconStyle>
+      <scale>1.1</scale>
+      <Icon><href>https://maps.google.com/mapfiles/ms/icons/blue-dot.png</href></Icon>
+    </IconStyle>
+    <LabelStyle><scale>0.85</scale></LabelStyle>
+  </Style>
+  <Style id="badge_b">
+    <IconStyle>
+      <scale>1.1</scale>
+      <Icon><href>https://maps.google.com/mapfiles/ms/icons/green-dot.png</href></Icon>
+    </IconStyle>
+    <LabelStyle><scale>0.85</scale></LabelStyle>
+  </Style>
+
+
+  <Placemark>
+    <name>1. Sint-Veerleplein</name>
+    <description><![CDATA[У замка · уличный театр · 11:00–16:00<br/>⏰ 11:00–16:00<br/>Театр · день]]></description>
+    <styleUrl>#badge_s</styleUrl>
+    <Point><coordinates>3.719,51.058,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>2. Baudelopark</name>
+    <description><![CDATA[Цирк · Puppet Buskers Festival · 14:00–17:00<br/>⏰ 14:00–17:00<br/>Цирк · день]]></description>
+    <styleUrl>#badge_s</styleUrl>
+    <Point><coordinates>3.7271,51.0587,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>3. Граслей / Коренлей</name>
+    <description><![CDATA[Живая музыка у воды · закат · 18:00–22:00<br/>⏰ 18:00–22:00<br/>Концерт · вечер]]></description>
+    <styleUrl>#badge_b</styleUrl>
+    <Point><coordinates>3.7195,51.0534,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>4. Коренмаркт</name>
+    <description><![CDATA[Главная сцена · DJ Tom · с 22:00<br/>⏰ 22:00+<br/>DJ · ночь]]></description>
+    <styleUrl>#badge_b</styleUrl>
+    <Point><coordinates>3.7213,51.054,0</coordinates></Point>
+  </Placemark>
+</Document>
+</kml>

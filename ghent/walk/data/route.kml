@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document>
+  <name>Ghent — Walk</name>
+  <open>1</open>
+
+  <Style id="badge_h">
+    <IconStyle>
+      <scale>1.1</scale>
+      <Icon><href>https://maps.google.com/mapfiles/ms/icons/purple-dot.png</href></Icon>
+    </IconStyle>
+    <LabelStyle><scale>0.85</scale></LabelStyle>
+  </Style>
+  <Style id="badge_s">
+    <IconStyle>
+      <scale>1.1</scale>
+      <Icon><href>https://maps.google.com/mapfiles/ms/icons/blue-dot.png</href></Icon>
+    </IconStyle>
+    <LabelStyle><scale>0.85</scale></LabelStyle>
+  </Style>
+  <Style id="badge_f">
+    <IconStyle>
+      <scale>1.1</scale>
+      <Icon><href>https://maps.google.com/mapfiles/ms/icons/orange-dot.png</href></Icon>
+    </IconStyle>
+    <LabelStyle><scale>0.85</scale></LabelStyle>
+  </Style>
+  <Style id="badge_b">
+    <IconStyle>
+      <scale>1.1</scale>
+      <Icon><href>https://maps.google.com/mapfiles/ms/icons/green-dot.png</href></Icon>
+    </IconStyle>
+    <LabelStyle><scale>0.85</scale></LabelStyle>
+  </Style>
+
+  <Placemark>
+    <name>Маршрут</name>
+    <Style>
+      <LineStyle><color>ff2266cc</color><width>3</width></LineStyle>
+      <PolyStyle><fill>0</fill></PolyStyle>
+    </Style>
+    <LineString>
+      <tessellate>1</tessellate>
+      <coordinates>3.7192,51.0578,0 3.7187,51.0582,0 3.7232,51.0549,0 3.7205,51.0568,0 3.7195,51.0534,0 3.7217,51.054,0 3.7222,51.0538,0 3.7237,51.05337,0 3.7219,51.0564,0 3.7218,51.0571,0</coordinates>
+    </LineString>
+  </Placemark>
+
+  <Placemark>
+    <name>1. Gent Gravensteen Hotel</name>
+    <description><![CDATA[Заселение · Sint-Veerleplein 5<br/>⏰ 10:30<br/>Отель · старт]]></description>
+    <styleUrl>#badge_h</styleUrl>
+    <Point><coordinates>3.7192,51.0578,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>2. Замок Гравенстен</name>
+    <description><![CDATA[Замок Графов · XII в · внутри<br/>⏰ 11:00<br/>Замок]]></description>
+    <styleUrl>#badge_s</styleUrl>
+    <Point><coordinates>3.7187,51.0582,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>3. Обед · Стоофлес</name>
+    <description><![CDATA[Het Klokhuys · Corduwaniersstraat 65<br/>⏰ 13:00<br/>Обед]]></description>
+    <styleUrl>#badge_f</styleUrl>
+    <Point><coordinates>3.7232,51.0549,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>4. Патерсхол</name>
+    <description><![CDATA[Средневековый квартал · XIII в<br/>⏰ 14:15<br/>Квартал]]></description>
+    <styleUrl>#badge_s</styleUrl>
+    <Point><coordinates>3.7205,51.0568,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>5. Граслей и Коренлей</name>
+    <description><![CDATA[Набережная · гильдейские дома · XIV–XVII в<br/>⏰ 15:00<br/>Виды]]></description>
+    <styleUrl>#badge_s</styleUrl>
+    <Point><coordinates>3.7195,51.0534,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>6. Sint-Niklaaskerk</name>
+    <description><![CDATA[Церковь Св. Николая · XIII в · шельдская готика<br/>⏰ 15:45<br/>Церковь]]></description>
+    <styleUrl>#badge_s</styleUrl>
+    <Point><coordinates>3.7217,51.054,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>7. Бельфор</name>
+    <description><![CDATA[Колокольня · XIV в · ЮНЕСКО · смотровая<br/>⏰ 16:00<br/>Смотровая]]></description>
+    <styleUrl>#badge_s</styleUrl>
+    <Point><coordinates>3.7222,51.0538,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>8. Собор Св. Бавона + Гентский алтарь</name>
+    <description><![CDATA[Поклонение Агнцу · Ван Эйк · 1432 · ЮНЕСКО<br/>⏰ 16:30<br/>ЮНЕСКО]]></description>
+    <styleUrl>#badge_s</styleUrl>
+    <Point><coordinates>3.7237,51.05337,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>9. Werregarenstraat</name>
+    <description><![CDATA[Граффити-переулок · легальная галерея · 1995<br/>⏰ 17:30<br/>Стрит-арт]]></description>
+    <styleUrl>#badge_s</styleUrl>
+    <Point><coordinates>3.7219,51.0564,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>10. Vrijdagmarkt · Бар Дюль Грит</name>
+    <description><![CDATA[Площадь · пушка XV в · пиво с ботинком<br/>⏰ 18:00<br/>Финал · пиво]]></description>
+    <styleUrl>#badge_b</styleUrl>
+    <Point><coordinates>3.7218,51.0571,0</coordinates></Point>
+  </Placemark>
+</Document>
+</kml>

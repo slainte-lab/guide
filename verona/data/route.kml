@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document>
+  <name>Verona</name>
+  <open>1</open>
+
+  <Style id="badge_f">
+    <IconStyle>
+      <scale>1.1</scale>
+      <Icon><href>https://maps.google.com/mapfiles/ms/icons/orange-dot.png</href></Icon>
+    </IconStyle>
+    <LabelStyle><scale>0.85</scale></LabelStyle>
+  </Style>
+  <Style id="badge_s">
+    <IconStyle>
+      <scale>1.1</scale>
+      <Icon><href>https://maps.google.com/mapfiles/ms/icons/blue-dot.png</href></Icon>
+    </IconStyle>
+    <LabelStyle><scale>0.85</scale></LabelStyle>
+  </Style>
+
+  <Placemark>
+    <name>Маршрут</name>
+    <Style>
+      <LineStyle><color>ff2266cc</color><width>3</width></LineStyle>
+      <PolyStyle><fill>0</fill></PolyStyle>
+    </Style>
+    <LineString>
+      <tessellate>1</tessellate>
+      <coordinates>10.9931,45.4388,0 10.99282,45.43863,0 10.99848,45.44243,0 10.99876,45.44291,0 10.99868,45.44202,0 10.98963,45.4403,0 10.99944,45.44814,0 10.9843,45.431,0</coordinates>
+    </LineString>
+  </Placemark>
+
+  <Placemark>
+    <name>1. Завтрак</name>
+    <description><![CDATA[Кофе и корнетто · Пьяцца Бра<br/>⏰ 10:00<br/>Завтрак · итальянский]]></description>
+    <styleUrl>#badge_f</styleUrl>
+    <Point><coordinates>10.9931,45.4388,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>2. Арена ди Верона</name>
+    <description><![CDATA[Римский амфитеатр · I в н.э.<br/>⏰ 10:30<br/>Амфитеатр · €12]]></description>
+    <styleUrl>#badge_s</styleUrl>
+    <Point><coordinates>10.99282,45.43863,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>3. Пьяцца делле Эрбе</name>
+    <description><![CDATA[Древний форум · рынок · фонтан Мадонны<br/>⏰ 11:30<br/>Площадь]]></description>
+    <styleUrl>#badge_s</styleUrl>
+    <Point><coordinates>10.99848,45.44243,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>4. Пьяцца деи Синьори</name>
+    <description><![CDATA[Гробницы Скалигеров · Данте · Логджа<br/>⏰ 11:50<br/>История]]></description>
+    <styleUrl>#badge_s</styleUrl>
+    <Point><coordinates>10.99876,45.44291,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>5. Дом Джульетты</name>
+    <description><![CDATA[Балкон · бронзовая статуя · Виа Капелло 23<br/>⏰ 12:15<br/>Легенда · бесплатно]]></description>
+    <styleUrl>#badge_s</styleUrl>
+    <Point><coordinates>10.99868,45.44202,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>6. Кастельвеккьо</name>
+    <description><![CDATA[Замок XIV в · Карло Скарпа · мост Скалигеров<br/>⏰ 12:50<br/>Замок · €6]]></description>
+    <styleUrl>#badge_s</styleUrl>
+    <Point><coordinates>10.98963,45.4403,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>7. Понте Пьетра</name>
+    <description><![CDATA[Самый старый мост · I в до н.э.<br/>⏰ 13:50<br/>I в до н.э.]]></description>
+    <styleUrl>#badge_s</styleUrl>
+    <Point><coordinates>10.99944,45.44814,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>8. Обед перед вылетом</name>
+    <description><![CDATA[Ризотто алл'Амароне · у Порта Нуова<br/>⏰ 14:30<br/>Обед · €15–25]]></description>
+    <styleUrl>#badge_f</styleUrl>
+    <Point><coordinates>10.9843,45.431,0</coordinates></Point>
+  </Placemark>
+</Document>
+</kml>
