@@ -32,7 +32,10 @@ function startSpeak() {
   _audio.onended = () => {
     speaking = false; isPaused = false;
     _updatePlayBtn();
-    if (type === 'main') markDone();
+    if (type === 'main') {
+      markDone();
+      _maybeAutoFacts();
+    }
   };
   _audio.onerror = () => {
     speaking = false; isPaused = false; _audio = null;
@@ -71,6 +74,25 @@ function stopSpeak() {
     _audio = null;
   }
   _updatePlayBtn();
+}
+
+// ── АВТОЗАПУСК ФАКТОВ В GPS-РАДИУСЕ ──────────────────────────────
+function _maybeAutoFacts() {
+  if (cur < 0 || !STOPS[cur].facts) return;
+  if (typeof gpsActive === 'undefined' || !gpsActive) return;
+  if (typeof lastPos === 'undefined' || !lastPos) return;
+  if (typeof _dist !== 'function' || typeof GPS_RADIUS === 'undefined') return;
+  const s = STOPS[cur];
+  if (_dist(lastPos[0], lastPos[1], s.lat, s.lng) > GPS_RADIUS) return;
+  // ещё в радиусе — через 2 с запускаем факты
+  setTimeout(() => {
+    if (speaking || isPaused || cur < 0) return; // пользователь уже что-то запустил
+    factsMode = true;
+    document.getElementById('pl-text').textContent = STOPS[cur].facts;
+    const bFacts = document.getElementById('btn-facts');
+    if (bFacts) { bFacts.disabled = false; bFacts.classList.add('on'); }
+    startSpeak();
+  }, 2000);
 }
 
 // ── ВНУТРЕННИЕ ─────────────────────────────────────────────────────
