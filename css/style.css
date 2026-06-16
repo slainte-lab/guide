@@ -153,8 +153,17 @@ body.home {
 .hdr-count b { color: var(--gold); }
 .hdr-btns {
   display: flex;
+  flex-direction: row;
+  align-items: center;
   gap: 7px;
   margin-bottom: 5px;
+  flex-wrap: nowrap;
+}
+.hdr-btns .btn-offline,
+.hdr-btns .btn-gps {
+  -webkit-appearance: none;
+  flex-shrink: 0;
+  width: auto;
 }
 
 .prog {
