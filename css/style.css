@@ -37,6 +37,11 @@ html, body {
   align-items: center;
   gap: 8px;
   min-width: 0;
+  overflow: hidden;
+}
+.hdr-left > div {
+  min-width: 0;
+  overflow: hidden;
 }
 .btn-back {
   font-size: 26px;
@@ -113,31 +118,44 @@ body.home {
 .hdr {
   background: var(--card);
   border-bottom: 1px solid var(--border);
-  padding: 10px 14px 8px;
+  padding: 8px 14px 6px;
   flex-shrink: 0;
 }
 .hdr-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 .hdr-title {
   font-size: 15px;
   font-weight: 700;
   color: var(--gold);
   letter-spacing: -.2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .hdr-sub {
   font-size: 10.5px;
   color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .hdr-count {
   font-size: 11px;
   color: var(--muted);
   text-align: right;
+  flex-shrink: 0;
+  margin-left: 8px;
 }
 .hdr-count b { color: var(--gold); }
+.hdr-btns {
+  display: flex;
+  gap: 7px;
+  margin-bottom: 5px;
+}
 
 .prog {
   height: 3px;
@@ -377,8 +395,8 @@ body.home {
 }
 
 .btn-gps {
-  height: 34px;
-  padding: 0 10px;
+  height: 30px;
+  padding: 0 9px;
   background: var(--card2);
   border: 1px solid var(--border);
   border-radius: 8px;
@@ -399,8 +417,8 @@ body.home {
   white-space: nowrap;
 }
 .btn-offline {
-  height: 34px;
-  padding: 0 10px;
+  height: 30px;
+  padding: 0 9px;
   background: var(--card2);
   border: 1px solid var(--border);
   border-radius: 8px;
