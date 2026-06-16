@@ -40,9 +40,17 @@ function startSpeak() {
     showToast('Аудио не найдено');
   };
 
-  _audio.play().catch(() => {
-    speaking = false; isPaused = false; _audio = null;
-    _updatePlayBtn();
+  _audio.play().catch(e => {
+    speaking = false;
+    if (e && e.name === 'NotAllowedError') {
+      // iOS autoplay blocked — audio loaded, waiting for user tap
+      isPaused = true;
+      _updatePlayBtn();
+      showToast('Нажмите ▶ для воспроизведения');
+    } else {
+      isPaused = false; _audio = null;
+      _updatePlayBtn();
+    }
   });
 }
 

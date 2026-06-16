@@ -77,6 +77,7 @@ function selectStop(i) {
 
   const cards = document.querySelectorAll('.stop');
   if (cards[i]) cards[i].scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  _saveState();
 }
 
 // ── ДОПОЛНИТЕЛЬНЫЕ ФАКТЫ ─────────────────────────────────────────
@@ -104,6 +105,34 @@ function markDone() {
   document.getElementById('prog').style.width   = (done.size / STOPS.length * 100) + '%';
   renderList();
   updateMapMarkers();
+  _saveState();
+}
+
+// ── СОХРАНЕНИЕ / ВОССТАНОВЛЕНИЕ СОСТОЯНИЯ ────────────────────────
+function _saveState() {
+  try {
+    sessionStorage.setItem('ag_cur',  cur);
+    sessionStorage.setItem('ag_done', JSON.stringify([...done]));
+  } catch(e) {}
+}
+
+function _restoreState() {
+  try {
+    const savedDone = sessionStorage.getItem('ag_done');
+    const savedCur  = sessionStorage.getItem('ag_cur');
+    if (savedDone) {
+      done = new Set(JSON.parse(savedDone));
+      document.getElementById('vcount').textContent = done.size;
+      document.getElementById('prog').style.width   = (done.size / STOPS.length * 100) + '%';
+    }
+    const idx = savedCur !== null ? parseInt(savedCur) : 0;
+    selectStop(idx >= 0 && idx < STOPS.length ? idx : 0);
+    if (savedCur !== null && savedCur !== '-1') {
+      showToast('Маршрут восстановлен после перезагрузки');
+    }
+  } catch(e) {
+    selectStop(0);
+  }
 }
 
 // ── ОТКРЫТЬ В GOOGLE MAPS ────────────────────────────────────────
@@ -116,4 +145,4 @@ function openInMaps() {
 // ── СТАРТ ─────────────────────────────────────────────────────────
 document.getElementById('stop-total').textContent = STOPS.length;
 renderList();
-selectStop(0);
+_restoreState();

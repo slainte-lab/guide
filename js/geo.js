@@ -3,9 +3,33 @@
 // входе в радиус GPS_RADIUS метров от остановки.
 
 const GPS_RADIUS = 50; // метры
-let gpsWatchId   = null;
-let gpsActive    = false;
+let gpsWatchId    = null;
+let gpsActive     = false;
 let notifiedStops = new Set(); // уже сработавшие остановки в этой сессии
+let _keepAliveCtx = null;      // AudioContext-тишина: не даёт iOS убить геолокацию в фоне
+
+function _startKeepAlive() {
+  try {
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) return;
+    _keepAliveCtx = new AC();
+    const sr  = _keepAliveCtx.sampleRate;
+    const buf = _keepAliveCtx.createBuffer(1, sr, sr); // 1 с тишины
+    (function loop() {
+      const src = _keepAliveCtx.createBufferSource();
+      src.buffer = buf;
+      src.connect(_keepAliveCtx.destination);
+      src.onended = loop;
+      src.start();
+    })();
+  } catch(e) {}
+}
+
+function _stopKeepAlive() {
+  try {
+    if (_keepAliveCtx) { _keepAliveCtx.close(); _keepAliveCtx = null; }
+  } catch(e) {}
+}
 
 function toggleGPS() {
   if (gpsActive) stopGPS();
@@ -20,6 +44,7 @@ function startGPS() {
   gpsActive = true;
   notifiedStops.clear();
   _setGPSBtn(true);
+  _startKeepAlive(); // держим аудиосессию живой, чтобы iOS не убил геолокацию в фоне
   showToast('GPS включён · разрешите геолокацию в браузере');
 
   gpsWatchId = navigator.geolocation.watchPosition(
@@ -35,6 +60,7 @@ function stopGPS() {
     gpsWatchId = null;
   }
   gpsActive = false;
+  _stopKeepAlive();
   _setGPSBtn(false);
   showToast('GPS отключён');
 }
