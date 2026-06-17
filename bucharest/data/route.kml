@@ -34,7 +34,7 @@
     </Style>
     <LineString>
       <tessellate>1</tessellate>
-      <coordinates>26.0858,44.5711,0 26.0966,44.4394,0 26.0957,44.4404,0 26.0998,44.4329,0 26.1003,44.4324,0 26.1005,44.4327,0 26.0875,44.4275,0 26.1028,44.4282,0 26.1022,44.4261,0</coordinates>
+      <coordinates>26.0858,44.5711,0 26.0966,44.4394,0 26.0957,44.4404,0 26.0998,44.4329,0 26.1003,44.4324,0 26.1005,44.4327,0 26.0875,44.4275,0 26.1028,44.4282,0 26.1008,44.4318,0 26.1022,44.4261,0</coordinates>
     </LineString>
   </Placemark>
 
@@ -87,7 +87,13 @@
     <Point><coordinates>26.1028,44.4282,0</coordinates></Point>
   </Placemark>
   <Placemark>
-    <name>9. Автобус 783 · Аэропорт</name>
+    <name>9. Куртя Веке · Ханул луй Мануч</name>
+    <description><![CDATA[Дворец Дракулы XV в. · ужин 1808<br/>⏰ 15:30<br/>Ужин · история]]></description>
+    <styleUrl>#badge_f</styleUrl>
+    <Point><coordinates>26.1008,44.4318,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>10. Автобус 783 · Аэропорт</name>
     <description><![CDATA[Отправление 17:00 · Пьяца Унири<br/>⏰ 17:00<br/>Транспорт]]></description>
     <styleUrl>#badge_h</styleUrl>
     <Point><coordinates>26.1022,44.4261,0</coordinates></Point>
