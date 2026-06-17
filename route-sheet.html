@@ -9,77 +9,129 @@
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:14px;background:#f0f2f5;color:#222;line-height:1.4}
 .page{max-width:980px;margin:0 auto;background:#fff;min-height:100vh}
 
-.hd{background:#0d1b2a;color:#fff;padding:18px 16px 14px}
+/* ── Header ── */
+.hd{background:#0d1b2a;color:#fff;padding:16px 16px 12px}
 .hd h1{font-size:20px;font-weight:700;margin-bottom:3px}
-.hd .sub{font-size:12px;opacity:.75;margin-top:2px}
-.hd a{color:#7eb8f7;font-size:12px;text-decoration:none}
+.hd .sub{font-size:12px;opacity:.75}
+.hd a{color:#7eb8f7;font-size:12px;text-decoration:none;display:inline-block;margin-top:7px}
 .hd a:hover{text-decoration:underline}
 
+/* ── Table ── */
 table{width:100%;border-collapse:collapse}
 th{background:#0d1b2a;color:#fff;padding:7px 10px;text-align:left;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.4px}
-td{padding:7px 10px;border-bottom:1px solid #f0f0f0;vertical-align:top;font-size:13px}
+td{padding:7px 10px;border-bottom:1px solid #f0f0f0;vertical-align:middle;font-size:13px}
 
-tr.dh td{background:#0d1b2a;color:#fff;font-weight:700;font-size:12px;padding:5px 10px;letter-spacing:.2px}
-tr.dh.warn td{background:#8b1a00}
+/* Day headers */
+tr.dh td{background:#0d1b2a;color:#fff;font-weight:700;font-size:12px;padding:5px 10px}
+tr.dh.warn td{background:#7a1500}
 
+/* Row types */
 tr.rf td{background:#f0f6ff}
 tr.rh td{background:#f0fff5}
 tr.rt td{background:#f5f0ff}
 tr.rb td{background:#fff8f0}
 tr.rw td{background:#fff0f0}
-tr.rs td{background:#fafafa}
 tr.rn td{background:#fffdf0}
+/* City rows */
+tr.rc td{background:#f8f8f8;vertical-align:middle}
 
-.ic{font-size:15px;width:26px}
-.tm{font-weight:700;white-space:nowrap;font-size:13px;min-width:54px}
+/* Cells */
+.ic{font-size:15px;width:26px;text-align:center}
+.tm{font-weight:700;white-space:nowrap;font-size:13px;min-width:52px}
 .en{font-weight:600;font-size:13px}
 .es{font-size:11px;color:#666;margin-top:2px}
 .wt{color:#cc0000;font-weight:700}
 
-.code{display:inline-block;font-family:'Courier New',monospace;font-size:11px;background:#e8ecf8;color:#1a1a6e;border-radius:3px;padding:1px 5px;margin:1px 0}
-.code.g{background:#dff5e8;color:#165a2a}
-.code.o{background:#fff0d0;color:#6b3900}
+/* City name large */
+.cname{font-size:24px;font-weight:800;letter-spacing:2px;color:#0d1b2a;line-height:1}
 
-.df{font-size:11px;color:#555}
-.dc{font-family:monospace;font-size:11px;font-weight:700;color:#0d1b2a}
+/* Ticket links */
+.tl{display:inline-block;background:#e8ecf8;color:#1a1a6e;text-decoration:none;padding:5px 9px;border-radius:6px;font-size:11px;font-weight:700;margin:2px 1px;white-space:nowrap}
+.tl:hover,.tl:active{background:#c8d4f8}
 
-@media(max-width:620px){.ca,.co{display:none}}
+/* Responsive */
+@media(max-width:580px){.ca,.co{display:none}}
 
+/* Notes */
 .notes{padding:14px 16px;background:#f9f9f9;border-top:2px solid #ddd;font-size:12px;color:#444}
 .notes ul{margin:7px 0 0 18px;line-height:2.1}
 .notes b{color:#0d1b2a}
-.wn{color:#cc0000;font-weight:700}
+
+/* ── Password overlay ── */
+#ov{position:fixed;inset:0;background:#0d1b2a;z-index:9999;display:flex;align-items:center;justify-content:center}
+#ov-box{text-align:center;width:290px;padding:0 16px}
+#ov h2{color:#fff;font-size:18px;margin-bottom:4px}
+#ov .sub2{color:#7eb8f7;font-size:12px;margin-bottom:24px}
+#pi{width:100%;padding:13px;border:1px solid #223344;border-radius:8px;background:#132030;color:#fff;font-size:16px;outline:none;text-align:center;letter-spacing:1px}
+#pi:focus{border-color:#7eb8f7}
+#pi.err{border-color:#ff4444;animation:shake .3s}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+#ov-btn{margin-top:10px;width:100%;padding:13px;background:#7eb8f7;color:#0d1b2a;border:none;border-radius:8px;font-size:15px;font-weight:700;cursor:pointer}
+#ov-btn:hover{background:#a8d0ff}
+#ov-err{color:#ff6666;font-size:12px;margin-top:10px;height:16px}
 </style>
 </head>
 <body>
+
+<!-- Password overlay -->
+<div id="ov">
+  <div id="ov-box">
+    <div style="font-size:40px;margin-bottom:12px">🗺</div>
+    <h2>Маршрут · Европа 2026</h2>
+    <div class="sub2">Александр + Олеся + Ромка + Лена</div>
+    <input type="password" id="pi" placeholder="Пароль" autocomplete="off">
+    <button id="ov-btn" onclick="tryPass()">Войти</button>
+    <div id="ov-err"></div>
+  </div>
+</div>
+
+<script>
+(function(){
+  if(sessionStorage.getItem('ra26')==='1') document.getElementById('ov').style.display='none';
+  document.addEventListener('keydown',function(e){if(e.key==='Enter')tryPass();});
+})();
+function tryPass(){
+  var v=document.getElementById('pi').value;
+  if(v==='Notgood1987!'){
+    sessionStorage.setItem('ra26','1');
+    document.getElementById('ov').style.display='none';
+  } else {
+    var el=document.getElementById('pi');
+    el.value='';el.classList.add('err');
+    document.getElementById('ov-err').textContent='Неверный пароль';
+    setTimeout(function(){el.classList.remove('err');document.getElementById('ov-err').textContent='';},1200);
+  }
+}
+</script>
+
 <div class="page">
 
 <div class="hd">
   <h1>🗺 Маршрут — Европа 2026</h1>
   <div class="sub">Александр + Олеся + Ромка + Лена · 19 июля – 2 августа · 15 дней</div>
-  <div style="margin-top:8px"><a href="./">‹ Аудиогиды</a></div>
+  <a href="./">‹ Аудиогиды</a>
 </div>
 
 <table>
 <thead>
 <tr>
   <th style="width:26px"></th>
-  <th style="width:58px">Время</th>
+  <th style="width:56px">Время</th>
   <th>Событие</th>
-  <th>Детали / Код</th>
-  <th class="ca" style="width:135px">Александр</th>
-  <th class="co" style="width:135px">Олеся</th>
+  <th>Детали</th>
+  <th class="ca" style="width:115px">Александр</th>
+  <th class="co" style="width:115px">Олеся</th>
 </tr>
 </thead>
 <tbody>
 
-<!-- ══ 19 ИЮЛЯ ══ -->
+<!-- ══════ 19 ИЮЛЯ ══════ -->
 <tr class="dh"><td colspan="6">📅 19 июля (вс) — День 1 · Ижевск → Казань → Анталья → Париж Орли</td></tr>
 
 <tr class="rn">
   <td class="ic">🚗</td>
-  <td class="tm">рано</td>
-  <td><div class="en">Выезд из Ижевска → Казань</div><div class="es">~5–6 ч · прибыть в KZN к 09:00</div></td>
+  <td class="tm">04:30</td>
+  <td><div class="en">Выезд из Ижевска</div><div class="es">Ижевск → Казань, ~300 км · прибыть в KZN к 08:30</div></td>
   <td></td>
   <td class="ca"></td>
   <td class="co"></td>
@@ -88,50 +140,48 @@ tr.rn td{background:#fffdf0}
 <tr class="rf">
   <td class="ic">✈️</td>
   <td class="tm">10:50 →<br>15:45</td>
-  <td><div class="en">Победа DP957 · Казань (KZN) → Анталья (AYT)</div><div class="es">В аэропорту к 09:00 · 1 место багажа 10 кг</div></td>
-  <td><span class="code">B8VND4</span><br><div class="es">Место Олеся: 20B</div></td>
-  <td class="ca df"><div class="df">Marchrutnaya (Kaz-Ant_my)</div></td>
-  <td class="co df"><div class="df">Marchrutnaya (Kaz-Ant)</div><div class="dc">4252436886170</div></td>
+  <td><div class="en">Победа DP957 · Казань → Анталья (AYT)</div><div class="es">В аэропорту к 08:50 · 1 место багажа 10 кг</div></td>
+  <td><div class="es">Олеся: место 20B</div></td>
+  <td class="ca"><a class="tl" href="tickets/kaz-ant-a.pdf" target="_blank">📄 Билет</a></td>
+  <td class="co"><a class="tl" href="tickets/kaz-ant-o.pdf" target="_blank">📄 Билет</a></td>
 </tr>
 
 <tr class="rf">
   <td class="ic">✈️</td>
   <td class="tm">19:30 →<br>22:50</td>
-  <td><div class="en">Transavia TO-3275 · Antalya (AYT) → Paris Orly (ORY)</div><div class="es">⚠️ Пересадка AYT: прилёт 15:45, регистрация до <b>18:30</b> · 4 ч 20 мин</div></td>
-  <td><span class="code">RIER9X</span><br><div class="es">Орли → отель: OrlyBus → Denfert-Rochereau + метро, ~50 мин</div></td>
-  <td class="ca df"><div class="df">aerovaucher (Ant-Paris)</div><div class="dc">RIER9X</div></td>
-  <td class="co df"><div class="df">aerovaucher (Ant-Paris 2)</div><div class="dc">RIER9X</div></td>
+  <td><div class="en">Transavia TO-3275 · Antalya (AYT) → Paris Orly (ORY)</div><div class="es">⚠️ Регистрация в AYT до 18:30 · пересадка: прилёт 15:45, 2ч 45мин</div></td>
+  <td><div class="es">Орли → отель: OrlyBus → Denfert-Rochereau + метро, ~50 мин</div></td>
+  <td class="ca"><a class="tl" href="tickets/ant-paris-a.pdf" target="_blank">📄 Билет</a></td>
+  <td class="co"><a class="tl" href="tickets/ant-paris-o.pdf" target="_blank">📄 Билет</a></td>
 </tr>
 
 <tr class="rh">
   <td class="ic">🏨</td>
-  <td class="tm">~00:00</td>
-  <td><div class="en">Заселение · Ibis Paris Canal Saint-Martin</div><div class="es">12 Rue Louis Blanc, 75010 Paris · 15 мин пешком от Gare du Nord</div></td>
-  <td><span class="code g">2607190502</span><br><div class="es">Check-in после 14:00 · Выезд 22 июля до 12:00 · Завтрак 20–22 июля</div></td>
-  <td class="ca df"><div class="df">Ваучер (Париж)</div><div class="dc">2607190502</div></td>
-  <td class="co df"><div class="df">Ваучер (Париж)</div></td>
+  <td class="tm">~23:40</td>
+  <td><div class="en">Заселение · Ibis Paris Canal Saint-Martin</div><div class="es">12 Rue Louis Blanc, 75010 · 15 мин пешком от Gare du Nord</div></td>
+  <td><div class="es">Выезд 22 июля до 12:00 · Завтрак 20–22 июля включён</div></td>
+  <td class="ca"><a class="tl" href="tickets/paris-hotel.pdf" target="_blank">📄 Ваучер</a></td>
+  <td class="co"><a class="tl" href="tickets/paris-hotel.pdf" target="_blank">📄 Ваучер</a></td>
 </tr>
 
-<!-- ══ 20–21 ИЮЛЯ ══ -->
+<!-- ══════ 20–21 ИЮЛЯ ══════ -->
 <tr class="dh"><td colspan="6">📅 20–21 июля (пн–вт) — Дни 2–3 · Париж</td></tr>
 
-<tr class="rs">
+<tr class="rc">
   <td class="ic">🗺️</td>
-  <td class="tm">весь день</td>
-  <td><div class="en">Париж — Аудиогид (2 дня)</div><div class="es">16 точек · Марэ · Эйфелева башня · Монмартр · Завтрак в отеле</div></td>
-  <td></td>
-  <td class="ca"></td>
+  <td class="tm">2 дня</td>
+  <td colspan="3"><div class="cname">PARIS</div></td>
   <td class="co"></td>
 </tr>
 
-<!-- ══ 22 ИЮЛЯ ══ -->
+<!-- ══════ 22 ИЮЛЯ ══════ -->
 <tr class="dh"><td colspan="6">📅 22 июля (ср) — День 4 · Париж → Брюссель → Гент (ночевка)</td></tr>
 
 <tr class="rw">
   <td class="ic">🏨</td>
   <td class="tm">08:30</td>
-  <td><div class="en wt">Выезд из отеля (до 12:00)</div><div class="es">Завтрак ~07:30 · Ibis → Gare du Nord пешком 15 мин</div></td>
-  <td></td>
+  <td><div class="en wt">Выезд из отеля</div><div class="es">Завтрак ~07:30 · Ibis → Gare du Nord пешком 15 мин</div></td>
+  <td><div class="wt">Выезд до 12:00</div></td>
   <td class="ca"></td>
   <td class="co"></td>
 </tr>
@@ -139,88 +189,91 @@ tr.rn td{background:#fffdf0}
 <tr class="rt">
   <td class="ic">🚄</td>
   <td class="tm">09:24 →<br>10:47</td>
-  <td><div class="en">Eurostar 9321 · Paris Gare du Nord → Brussels Midi/Zuid</div><div class="es"><span class="wt">⚠️ Регистрация закрывается 08:54</span> · Вагон 15, место 16 (Александр)</div></td>
-  <td><span class="code">XVX7NC</span><br><div class="es">4 чел · Romka и Lena — свои билеты</div></td>
-  <td class="ca df"><div class="df">pdf-ticket (Paris-Brus_my)</div><div class="dc">XVX7NC · Ваг.15 М.16</div></td>
-  <td class="co df"><div class="df">pdf-ticket (Paris-Brus_Olesia)</div></td>
+  <td><div class="en">Eurostar 9321 · Paris Gare du Nord → Brussels Midi</div><div class="es"><span class="wt">⚠️ Регистрация закрывается 08:54</span> · Вагон 15, место 16 (Александр)</div></td>
+  <td><div class="es">Romka и Lena — свои билеты</div></td>
+  <td class="ca"><a class="tl" href="tickets/paris-brus-a.pdf" target="_blank">📄 Билет</a></td>
+  <td class="co"><a class="tl" href="tickets/paris-brus-o.pdf" target="_blank">📄 Билет</a></td>
 </tr>
 
 <tr class="rt">
   <td class="ic">🚆</td>
   <td class="tm">~11:00 →<br>~11:35</td>
-  <td><div class="en">IC · Брюссель Midi → Гент Sint-Pieters</div><div class="es">Каждые 30 мин · купить в автомате или приложении SNCB</div></td>
+  <td><div class="en">IC · Брюссель Midi → Гент Sint-Pieters</div><div class="es">Каждые 30 мин · приложение SNCB</div></td>
   <td></td>
   <td class="ca"></td>
   <td class="co"></td>
 </tr>
 
-<tr class="rs">
+<tr class="rc">
   <td class="ic">🗺️</td>
   <td class="tm">12:00–<br>19:30</td>
-  <td><div class="en">Гент · Прогулка + Gentse Feesten 2026</div><div class="es">10 точек · ~4 км · Замок Гравенстен → Три башни → Граффити</div></td>
-  <td></td>
-  <td class="ca"></td>
+  <td colspan="3"><div class="cname">GHENT</div></td>
   <td class="co"></td>
 </tr>
 
 <tr class="rh">
   <td class="ic">🏨</td>
   <td class="tm">ночь</td>
-  <td><div class="en">Ночевка в Генте</div><div class="es">Отель не забронирован</div></td>
-  <td><div class="wt">⚠️ Забронировать!</div></td>
+  <td><div class="en">Ночевка в Генте</div></td>
+  <td><div class="wt">⚠️ Отель не забронирован!</div></td>
   <td class="ca"></td>
   <td class="co"></td>
 </tr>
 
-<!-- ══ 23 ИЮЛЯ ══ -->
-<tr class="dh"><td colspan="6">📅 23 июля (чт) — День 5 · Гент → Брюгге</td></tr>
+<!-- ══════ 23 ИЮЛЯ ══════ -->
+<tr class="dh"><td colspan="6">📅 23 июля (чт) — День 5 · Гент → Антверпен → Tomorrowland (заезд)</td></tr>
 
 <tr class="rt">
   <td class="ic">🚆</td>
   <td class="tm">утро</td>
-  <td><div class="en">Поезд · Гент Sint-Pieters → Брюгге</div><div class="es">~30 мин · каждые 30 мин · приложение SNCB</div></td>
+  <td><div class="en">Поезд · Гент Sint-Pieters → Антверпен Centraal</div><div class="es">~55 мин · прямой · приложение SNCB</div></td>
   <td></td>
   <td class="ca"></td>
   <td class="co"></td>
 </tr>
 
-<tr class="rs">
+<tr class="rc">
   <td class="ic">🗺️</td>
   <td class="tm">день</td>
-  <td><div class="en">Брюгге — Аудиогид</div><div class="es">7 остановок · ~5 км · каналы, шоколад, пиво</div></td>
-  <td></td>
-  <td class="ca"></td>
+  <td colspan="3"><div class="cname">ANTWERPEN</div></td>
   <td class="co"></td>
 </tr>
-
-<!-- ══ 24–26 ИЮЛЯ ══ -->
-<tr class="dh"><td colspan="6">📅 24–26 июля (пт–вс) — Дни 6–8 · Tomorrowland Weekend 2</td></tr>
 
 <tr class="rn">
   <td class="ic">🎪</td>
-  <td class="tm">3 дня</td>
-  <td><div class="en">Tomorrowland 2026 · Weekend 2 · Boom, Бельгия</div><div class="es">27 июля: шатл от Watertoren Reet в CRL в 04:30 · взять ID-карту/паспорт</div></td>
+  <td class="tm">вечер</td>
+  <td><div class="en">Переезд · Антверпен → Boom · заезд Tomorrowland</div><div class="es">~30 мин на поезде · DreamVille check-in</div></td>
   <td></td>
   <td class="ca"></td>
   <td class="co"></td>
 </tr>
 
-<!-- ══ 27 ИЮЛЯ ══ -->
+<!-- ══════ 24–26 ИЮЛЯ ══════ -->
+<tr class="dh"><td colspan="6">📅 24–26 июля (пт–вс) — Дни 6–8 · Tomorrowland Weekend 2</td></tr>
+
+<tr class="rc">
+  <td class="ic">🎪</td>
+  <td class="tm">3 дня</td>
+  <td colspan="3"><div class="cname">TOMORROWLAND</div></td>
+  <td class="co"></td>
+</tr>
+
+<!-- ══════ 27 ИЮЛЯ ══════ -->
 <tr class="dh warn"><td colspan="6">📅 27 июля (пн) — День 9 ⚠️ РАННИЙ СТАРТ · Верона → Корфу</td></tr>
 
 <tr class="rw">
   <td class="ic">⚠️</td>
   <td class="tm">04:15</td>
-  <td><div class="en wt">Быть у шатла EventArea.be → CRL</div><div class="es">Watertoren Reet · Keelhoevestraat 1, 2840 Rumst · за 15 мин до 04:30</div></td>
-  <td><span class="code o">5116704314093</span><br><div class="es">35€ · взять ID · время уточнить на eventarea.be</div></td>
-  <td class="ca df"><div class="df">Tomorrowland CRL shuttle</div><div class="dc">5116704314093</div></td>
-  <td class="co df"><div class="dc">—</div></td>
+  <td><div class="en wt">Быть у шатла Tomorrowland → CRL</div><div class="es">Watertoren Reet, Keelhoevestraat 1, 2840 Rumst</div></td>
+  <td><div class="es">35€ · взять ID · время уточнить на eventarea.be в день отправления</div></td>
+  <td class="ca"><a class="tl" href="tickets/tomorrowland.pdf" target="_blank">📄 Шатл</a></td>
+  <td class="co"></td>
 </tr>
 
 <tr class="rb">
   <td class="ic">🚌</td>
   <td class="tm">04:30 →<br>~06:00</td>
-  <td><div class="en">Шатл · Rumst → Brussels Charleroi (CRL)</div><div class="es">~1.5 ч · в аэропорту ~06:00</div></td>
+  <td><div class="en">Шатл · Rumst → Brussels Charleroi (CRL)</div></td>
   <td></td>
   <td class="ca"></td>
   <td class="co"></td>
@@ -230,17 +283,15 @@ tr.rn td{background:#fffdf0}
   <td class="ic">✈️</td>
   <td class="tm">07:45 →<br>09:25</td>
   <td><div class="en">Ryanair FR9101 · Brussels CRL → Verona (VRN)</div><div class="es">Priority + 2 cabin bags · в аэропорту к 06:15</div></td>
-  <td><span class="code">O7M4HH</span></td>
-  <td class="ca df"><div class="dc">O7M4HH</div></td>
-  <td class="co df"><div class="dc">O7M4HH</div></td>
+  <td></td>
+  <td class="ca"><a class="tl" href="tickets/crl-vrn.pdf" target="_blank">📄 Билет</a></td>
+  <td class="co"><a class="tl" href="tickets/crl-vrn.pdf" target="_blank">📄 Билет</a></td>
 </tr>
 
-<tr class="rs">
+<tr class="rc">
   <td class="ic">🗺️</td>
   <td class="tm">09:25–<br>16:55</td>
-  <td><div class="en">Верона — Транзит (~7.5 часов)</div><div class="es">8 остановок · ~5 км · Арена · Джульетта · Скалигери · Адидже</div></td>
-  <td><div class="es">Камера хранения: VRN arrivals hall или ж/д вокзал Porta Nuova</div></td>
-  <td class="ca"></td>
+  <td colspan="3"><div class="cname">VERONA</div></td>
   <td class="co"></td>
 </tr>
 
@@ -248,40 +299,38 @@ tr.rn td{background:#fffdf0}
   <td class="ic">✈️</td>
   <td class="tm">16:55 →<br>19:40</td>
   <td><div class="en">Ryanair FR6998 · Verona (VRN) → Corfu (CFU)</div><div class="es">В аэропорту к 15:25</div></td>
-  <td><span class="code">P5P69N</span></td>
-  <td class="ca df"><div class="dc">P5P69N</div></td>
-  <td class="co df"><div class="dc">P5P69N</div></td>
+  <td></td>
+  <td class="ca"><a class="tl" href="tickets/vrn-cfu.pdf" target="_blank">📄 Билет</a></td>
+  <td class="co"><a class="tl" href="tickets/vrn-cfu.pdf" target="_blank">📄 Билет</a></td>
 </tr>
 
 <tr class="rh">
   <td class="ic">🏨</td>
   <td class="tm">от 15:00<br>(факт ~21h)</td>
-  <td><div class="en">Заселение · Casa Antica · Корфу</div><div class="es">1 Aristotelous, 3rd floor · Kerkira, 49100 · Тел. +30 698 073 4752</div></td>
-  <td><span class="code g">6565.393.330</span> PIN: <b>6297</b><br><div class="es">⚠️ Предупредить о позднем заезде (~21:00) · 4 взрослых · NON-REFUNDABLE</div></td>
-  <td class="ca df"><div class="df">Corfu (booking)</div><div class="dc">6565.393.330</div></td>
-  <td class="co df"><div class="df">Corfu (booking)</div></td>
+  <td><div class="en">Заселение · Casa Antica · Корфу</div><div class="es">1 Aristotelous, 3rd floor, Kerkira 49100 · Тел. +30 698 073 4752</div></td>
+  <td><div class="wt">⚠️ Предупредить о позднем заезде (~21:00)</div><div class="es">PIN: 6297 · 4 взрослых · NON-REFUNDABLE</div></td>
+  <td class="ca"><a class="tl" href="tickets/corfu.pdf" target="_blank">📄 Бронь</a></td>
+  <td class="co"><a class="tl" href="tickets/corfu.pdf" target="_blank">📄 Бронь</a></td>
 </tr>
 
-<!-- ══ 28–31 ИЮЛЯ ══ -->
+<!-- ══════ 28–31 ИЮЛЯ ══════ -->
 <tr class="dh"><td colspan="6">📅 28–31 июля (вт–пт) — Дни 10–13 · Корфу</td></tr>
 
-<tr class="rs">
+<tr class="rc">
   <td class="ic">🏖️</td>
   <td class="tm">4 дня</td>
-  <td><div class="en">Корфу — Отдых + Аудиогид</div><div class="es">Старый город Керкиры · Палеокастрица · Porto Timoni</div></td>
-  <td><div class="es wt">⚠️ Выезд 1 авг ~05:30 — рейс в 08:20!</div></td>
-  <td class="ca"></td>
+  <td colspan="3"><div class="cname">CORFU</div></td>
   <td class="co"></td>
 </tr>
 
-<!-- ══ 1 АВГУСТА ══ -->
+<!-- ══════ 1 АВГУСТА ══════ -->
 <tr class="dh warn"><td colspan="6">📅 1 августа (сб) — День 14 ⚠️ РАННИЙ СТАРТ · Корфу → Бухарест → Анталья</td></tr>
 
 <tr class="rw">
   <td class="ic">⚠️</td>
   <td class="tm">~05:30</td>
-  <td><div class="en wt">Выезд из Casa Antica</div><div class="es">Check-out до 09:00 · Рейс в 08:20 · В аэропорту к 06:20</div></td>
-  <td><div class="wt">Договориться куда оставить ключи!</div><div class="es">Тел. +30 698 073 4752</div></td>
+  <td><div class="en wt">Выезд из Casa Antica</div><div class="es">Рейс в 08:20 · В аэропорту к 06:20</div></td>
+  <td><div class="wt">Заранее договориться о передаче ключей!</div><div class="es">+30 698 073 4752</div></td>
   <td class="ca"></td>
   <td class="co"></td>
 </tr>
@@ -289,38 +338,36 @@ tr.rn td{background:#fffdf0}
 <tr class="rf">
   <td class="ic">✈️</td>
   <td class="tm">08:20 →<br>10:00</td>
-  <td><div class="en">Wizz Air W4 3286 · Corfu (CFU) → Bucharest OTP</div><div class="es">В аэропорту к 06:20 (за 2 ч) · Только ручная кладь 40×30×20 см, макс 10 кг</div></td>
-  <td><span class="code">GSC59U</span></td>
-  <td class="ca df"><div class="dc">GSC59U</div></td>
-  <td class="co df"><div class="dc">GSC59U</div></td>
+  <td><div class="en">Wizz Air W4 3286 · Corfu (CFU) → Bucharest OTP</div><div class="es">Только ручная кладь 40×30×20 см, макс 10 кг</div></td>
+  <td></td>
+  <td class="ca"><a class="tl" href="tickets/cfu-otp.pdf" target="_blank">📄 Билет</a></td>
+  <td class="co"><a class="tl" href="tickets/cfu-otp.pdf" target="_blank">📄 Билет</a></td>
 </tr>
 
-<tr class="rs">
+<tr class="rc">
   <td class="ic">🗺️</td>
   <td class="tm">09:30–<br>19:00</td>
-  <td><div class="en">Бухарест — Транзит (11 остановок · ~8 км)</div><div class="es">Камера хранения: OTP Terminal 1 · Площадь Революции → Атенеум → Дворец Парламента</div></td>
-  <td><div class="es">Автобус 783 → OTP отправление ~17:00 с Пьяцы Унири</div></td>
-  <td class="ca"></td>
+  <td colspan="3"><div class="cname">BUCHAREST</div></td>
   <td class="co"></td>
 </tr>
 
 <tr class="rf">
   <td class="ic">✈️</td>
   <td class="tm">19:45 →<br>21:45</td>
-  <td><div class="en">Wizz Air W4 3041 · Bucharest OTP → Antalya (AYT)</div><div class="es">В аэропорту к 18:15 · забрать вещи из камеры хранения заранее</div></td>
-  <td><span class="code">DW74ST</span></td>
-  <td class="ca df"><div class="dc">DW74ST</div></td>
-  <td class="co df"><div class="dc">DW74ST</div></td>
+  <td><div class="en">Wizz Air W4 3041 · Bucharest OTP → Antalya (AYT)</div><div class="es">В аэропорту к 18:15 · Только ручная кладь 40×30×20 см</div></td>
+  <td></td>
+  <td class="ca"><a class="tl" href="tickets/otp-ayt.pdf" target="_blank">📄 Билет</a></td>
+  <td class="co"><a class="tl" href="tickets/otp-ayt.pdf" target="_blank">📄 Билет</a></td>
 </tr>
 
-<!-- ══ 2 АВГУСТА ══ -->
+<!-- ══════ 2 АВГУСТА ══════ -->
 <tr class="dh warn"><td colspan="6">📅 2 августа (вс) — День 15 ⚠️ РАННИЙ ВЫЛЕТ · Анталья → Казань</td></tr>
 
 <tr class="rw">
   <td class="ic">⚠️</td>
   <td class="tm">ночь</td>
   <td><div class="en wt">Ночь в аэропорту Анталья (AYT)</div><div class="es">Прилёт 21:45 · Вылет в 06:00 · На регистрацию к 04:00</div></td>
-  <td><div class="wt">Не уснуть! Посадка закрывается за 20 мин до вылета</div></td>
+  <td><div class="wt">Посадка закрывается за 20 мин до вылета</div></td>
   <td class="ca"></td>
   <td class="co"></td>
 </tr>
@@ -328,16 +375,16 @@ tr.rn td{background:#fffdf0}
 <tr class="rf">
   <td class="ic">✈️</td>
   <td class="tm">06:00 →<br>10:10</td>
-  <td><div class="en">Аэрофлот SU795 · Antalya (AYT) → Kazan (KZN)</div><div class="es">В аэропорту к 04:00 · Эконом Лайт · Багаж не включён · Airbus A320</div></td>
-  <td><span class="code">BD0244</span></td>
-  <td class="ca df"><div class="df">BORISOV (Ant-Kaz)</div><div class="dc">BD0244</div></td>
-  <td class="co df"><div class="df">BORISOVA (Ant-Kaz)</div></td>
+  <td><div class="en">Аэрофлот SU795 · Antalya (AYT) → Kazan (KZN)</div><div class="es">Эконом Лайт · Багаж не включён · Airbus A320</div></td>
+  <td></td>
+  <td class="ca"><a class="tl" href="tickets/ant-kaz-a.pdf" target="_blank">📄 Билет</a></td>
+  <td class="co"><a class="tl" href="tickets/ant-kaz-o.pdf" target="_blank">📄 Билет</a></td>
 </tr>
 
 <tr class="rn">
   <td class="ic">🏠</td>
   <td class="tm">10:10</td>
-  <td><div class="en">Прибытие · Казань (KZN)</div><div class="es">Дорога Казань → Ижевск · ~5–6 ч</div></td>
+  <td><div class="en">Прибытие · Казань → Ижевск</div><div class="es">~300 км · ~3.5–4 ч</div></td>
   <td></td>
   <td class="ca"></td>
   <td class="co"></td>
@@ -349,21 +396,20 @@ tr.rn td{background:#fffdf0}
 <div class="notes">
   <b>⚠️ Ключевые дедлайны:</b>
   <ul>
-    <li><b>19 июля 18:30</b> — закрытие регистрации Transavia в AYT · пересадка: прилёт 15:45, времени достаточно</li>
+    <li><b>19 июля 18:30</b> — закрытие регистрации Transavia в AYT (прилёт 15:45 — всё успеваем)</li>
     <li><b>22 июля 08:54</b> — закрытие регистрации Eurostar · выходить из отеля в <b>08:30</b></li>
-    <li><b>27 июля 04:15</b> — быть у шатла Tomorrowland (Rumst) · уточнить точное время на eventarea.be</li>
-    <li><b>1 августа 05:30</b> — выезд из Casa Antica · рейс CFU→OTP в <b>08:20</b></li>
+    <li><b>27 июля 04:15</b> — быть у шатла в Rumst · уточнить время на eventarea.be в день отправления</li>
+    <li><b>1 августа ~05:30</b> — выезд Casa Antica · рейс CFU→OTP в <b>08:20</b> · ключи!</li>
     <li><b>2 августа 04:00</b> — регистрация Аэрофлот в AYT · рейс в <b>06:00</b></li>
   </ul>
   <br>
-  <b>📋 Другие важные напоминания:</b>
+  <b>📋 Другие напоминания:</b>
   <ul>
-    <li>Гент 22 июля: <b>забронировать отель!</b> (ночь с 22 на 23 июля)</li>
-    <li>Корфу Casa Antica: предупредить о позднем заезде 27 июля (~21:00) и передаче ключей 1 авг в 05:30</li>
-    <li>Wizz Air (оба рейса): только ручная кладь <b>40×30×20 см, макс 10 кг</b></li>
-    <li>Аэрофлот SU795: ручная кладь 55×40×25 см, 10 кг · багаж не включён</li>
+    <li>Гент 22 июля: <b>забронировать отель на ночь 22–23 июля!</b></li>
+    <li>Корфу Casa Antica: предупредить о позднем заезде 27 июля (~21:00)</li>
+    <li>Wizz Air оба рейса: ручная кладь <b>макс 40×30×20 см, 10 кг</b></li>
+    <li>Аэрофлот SU795: ручная кладь 55×40×25 см, 10 кг · платный багаж</li>
     <li>Победа DP957: 1 место багажа 10 кг · ручная кладь 36×30×27 см</li>
-    <li>Автобус 783 из центра Бухареста до OTP: ~50 мин</li>
   </ul>
 </div>
 
