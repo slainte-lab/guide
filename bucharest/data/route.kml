@@ -34,15 +34,15 @@
     </Style>
     <LineString>
       <tessellate>1</tessellate>
-      <coordinates>26.0816,44.4473,0 26.0966,44.4394,0 26.0957,44.4404,0 26.0998,44.4329,0 26.1003,44.4324,0 26.1005,44.4327,0 26.0875,44.4275,0</coordinates>
+      <coordinates>26.0858,44.5711,0 26.0966,44.4394,0 26.0957,44.4404,0 26.0998,44.4329,0 26.1003,44.4324,0 26.1005,44.4327,0 26.0875,44.4275,0</coordinates>
     </LineString>
   </Placemark>
 
   <Placemark>
-    <name>1. Гара де Норд · камера хранения</name>
-    <description><![CDATA[Главный вокзал · старт транзита<br/>⏰ 10:15<br/>Вокзал]]></description>
+    <name>1. Аэропорт · камера хранения</name>
+    <description><![CDATA[Анри Коандэ · Terminal 1 · старт<br/>⏰ 09:30<br/>Аэропорт]]></description>
     <styleUrl>#badge_h</styleUrl>
-    <Point><coordinates>26.0816,44.4473,0</coordinates></Point>
+    <Point><coordinates>26.0858,44.5711,0</coordinates></Point>
   </Placemark>
   <Placemark>
     <name>2. Площадь Революции</name>
