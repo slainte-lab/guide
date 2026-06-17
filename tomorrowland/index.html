@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>🎪 Tomorrowland 2026</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+  min-height:100vh;
+  background:#07000f;
+  color:#fff;
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;
+  overflow:hidden;
+  position:relative;
+}
+
+/* ── Stars canvas ── */
+#stars{position:fixed;inset:0;z-index:0;pointer-events:none}
+
+/* ── Purple glow pulses ── */
+.glow1{
+  position:fixed;width:500px;height:500px;
+  background:radial-gradient(circle,rgba(120,30,200,.35) 0%,transparent 70%);
+  top:-100px;left:-100px;z-index:0;
+  animation:pulse1 6s ease-in-out infinite alternate;
+}
+.glow2{
+  position:fixed;width:600px;height:600px;
+  background:radial-gradient(circle,rgba(60,0,160,.3) 0%,transparent 70%);
+  bottom:-150px;right:-150px;z-index:0;
+  animation:pulse1 8s ease-in-out infinite alternate-reverse;
+}
+.glow3{
+  position:fixed;width:400px;height:400px;
+  background:radial-gradient(circle,rgba(200,100,0,.2) 0%,transparent 70%);
+  top:50%;left:50%;transform:translate(-50%,-50%);z-index:0;
+  animation:pulse1 5s ease-in-out infinite alternate;
+}
+@keyframes pulse1{from{opacity:.5;transform:scale(1)}to{opacity:1;transform:scale(1.15)}}
+
+/* ── Main content ── */
+.wrap{position:relative;z-index:2;padding:40px 24px;max-width:500px;width:100%}
+
+.btn-back{
+  position:fixed;top:14px;left:14px;z-index:10;
+  color:rgba(255,255,255,.7);text-decoration:none;font-size:15px;
+  background:rgba(0,0,0,.4);padding:6px 12px;border-radius:20px;
+  backdrop-filter:blur(6px);
+}
+.btn-back:hover{color:#fff}
+
+.logo{
+  width:320px;max-width:88vw;
+  filter:drop-shadow(0 0 24px rgba(180,80,255,.7)) drop-shadow(0 0 8px rgba(255,200,50,.4));
+  animation:float 4s ease-in-out infinite;
+  margin:0 auto 8px;
+  display:block;
+}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+
+.year{
+  font-size:13px;letter-spacing:5px;text-transform:uppercase;
+  color:rgba(200,150,255,.8);margin-bottom:20px;
+}
+
+.dates{
+  font-size:20px;font-weight:700;letter-spacing:1px;
+  background:linear-gradient(90deg,#c87cff,#ffb830,#ff6ec0,#c87cff);
+  background-size:200%;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  animation:shimmer 4s linear infinite;
+  margin-bottom:6px;
+}
+@keyframes shimmer{0%{background-position:0%}100%{background-position:200%}}
+
+.location{font-size:13px;color:rgba(255,255,255,.5);letter-spacing:2px;margin-bottom:36px}
+
+/* ── Music player ── */
+.player-wrap{
+  background:rgba(255,255,255,.07);
+  border:1px solid rgba(180,80,255,.3);
+  border-radius:16px;padding:18px 20px;
+  backdrop-filter:blur(10px);
+}
+.track-name{font-size:13px;color:rgba(200,150,255,.9);letter-spacing:.5px;margin-bottom:14px}
+.track-title{font-size:16px;font-weight:700;margin-bottom:16px}
+
+.play-btn{
+  width:64px;height:64px;border-radius:50%;
+  background:linear-gradient(135deg,#9b30ff,#ff6ec0);
+  border:none;color:#fff;font-size:24px;cursor:pointer;
+  box-shadow:0 0 24px rgba(155,48,255,.6);
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 14px;
+  transition:transform .15s,box-shadow .15s;
+}
+.play-btn:hover{transform:scale(1.08);box-shadow:0 0 36px rgba(155,48,255,.9)}
+.play-btn:active{transform:scale(.96)}
+
+/* Bars visualizer (CSS-only animation when playing) */
+.bars{display:flex;align-items:flex-end;justify-content:center;gap:3px;height:28px;margin-top:12px}
+.bar{width:4px;border-radius:2px;background:linear-gradient(to top,#9b30ff,#ffb830);opacity:0;transition:opacity .3s}
+.playing .bar{opacity:1;animation:bar-anim 1s ease-in-out infinite alternate}
+.bar:nth-child(1){animation-delay:0s;    height:40%}
+.bar:nth-child(2){animation-delay:.1s;   height:70%}
+.bar:nth-child(3){animation-delay:.05s;  height:100%}
+.bar:nth-child(4){animation-delay:.15s;  height:55%}
+.bar:nth-child(5){animation-delay:.08s;  height:85%}
+.bar:nth-child(6){animation-delay:.18s;  height:45%}
+.bar:nth-child(7){animation-delay:.03s;  height:90%}
+.bar:nth-child(8){animation-delay:.12s;  height:65%}
+@keyframes bar-anim{from{transform:scaleY(.3)}to{transform:scaleY(1)}}
+
+.time-hint{font-size:11px;color:rgba(255,255,255,.35);margin-top:10px}
+
+#audio-el{display:none}
+</style>
+</head>
+<body>
+
+<canvas id="stars"></canvas>
+<div class="glow1"></div>
+<div class="glow2"></div>
+<div class="glow3"></div>
+
+<a class="btn-back" href="../">‹ Назад</a>
+
+<div class="wrap">
+  <img class="logo" src="logo.png" alt="Tomorrowland">
+  <div class="year">Belgium · Weekend 2</div>
+  <div class="dates">23 – 26 июля 2026</div>
+  <div class="location">BOOM · BELGIUM</div>
+
+  <div class="player-wrap" id="player">
+    <div class="track-name">ARTBAT feat. John Newman</div>
+    <div class="track-title">Take You There</div>
+    <button class="play-btn" id="btn-play" onclick="togglePlay()">▶</button>
+    <div class="bars" id="bars">
+      <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+      <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+      <div class="bar"></div><div class="bar"></div>
+    </div>
+    <div class="time-hint" id="time-hint">▸ с дропа</div>
+  </div>
+</div>
+
+<audio id="audio-el" src="artbat-take-you-there.mp3" preload="auto"></audio>
+
+<script>
+/* ── Stars ── */
+(function(){
+  var c=document.getElementById('stars'),ctx=c.getContext('2d');
+  function resize(){c.width=innerWidth;c.height=innerHeight;}
+  resize();window.addEventListener('resize',resize);
+  var stars=[];
+  for(var i=0;i<160;i++) stars.push({
+    x:Math.random(),y:Math.random(),
+    r:Math.random()*1.4+.3,
+    a:Math.random(),
+    da:(Math.random()-.5)*.008
+  });
+  function draw(){
+    ctx.clearRect(0,0,c.width,c.height);
+    stars.forEach(function(s){
+      s.a=Math.max(.1,Math.min(1,s.a+s.da));
+      if(s.a<=.1||s.a>=1) s.da=-s.da;
+      ctx.beginPath();
+      ctx.arc(s.x*c.width,s.y*c.height,s.r,0,Math.PI*2);
+      ctx.fillStyle='rgba(255,255,255,'+s.a+')';
+      ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+/* ── Audio ── */
+var audio=document.getElementById('audio-el');
+var DROP=115; /* seconds — начало дропа ARTBAT Take You There */
+var playing=false;
+
+audio.addEventListener('loadedmetadata',function(){
+  audio.currentTime=DROP;
+});
+
+function togglePlay(){
+  if(playing){
+    audio.pause();
+    playing=false;
+    document.getElementById('btn-play').textContent='▶';
+    document.getElementById('bars').classList.remove('playing');
+    document.getElementById('time-hint').textContent='▸ с дропа';
+  } else {
+    if(Math.abs(audio.currentTime-DROP)<1 && audio.paused && audio.currentTime===0){
+      audio.currentTime=DROP;
+    }
+    audio.play().then(function(){
+      playing=true;
+      document.getElementById('btn-play').textContent='⏸';
+      document.getElementById('bars').classList.add('playing');
+      document.getElementById('time-hint').textContent='♪ playing';
+    }).catch(function(){});
+  }
+}
+
+/* Autoplay on load */
+window.addEventListener('load',function(){
+  audio.currentTime=DROP;
+  audio.play().then(function(){
+    playing=true;
+    document.getElementById('btn-play').textContent='⏸';
+    document.getElementById('bars').classList.add('playing');
+    document.getElementById('time-hint').textContent='♪ playing';
+  }).catch(function(){
+    /* Browser blocked autoplay — user clicks play */
+  });
+});
+</script>
+</body>
+</html>
