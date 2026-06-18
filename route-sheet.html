@@ -32,7 +32,6 @@ tr.rt td{background:#f5f0ff}
 tr.rb td{background:#fff8f0}
 tr.rw td{background:#fff0f0}
 tr.rn td{background:#fffdf0}
-/* City rows */
 tr.rc td{background:#f8f8f8;vertical-align:middle}
 
 /* Cells */
@@ -49,8 +48,14 @@ tr.rc td{background:#f8f8f8;vertical-align:middle}
 .tl{display:inline-block;background:#e8ecf8;color:#1a1a6e;text-decoration:none;padding:5px 9px;border-radius:6px;font-size:11px;font-weight:700;margin:2px 1px;white-space:nowrap}
 .tl:hover,.tl:active{background:#c8d4f8}
 
+/* Mobile inline ticket links — hidden on desktop */
+.mob-links{display:none}
+
 /* Responsive */
-@media(max-width:580px){.ca,.co{display:none}}
+@media(max-width:580px){
+  .ca,.co{display:none}
+  .mob-links{display:flex;gap:5px;flex-wrap:wrap;margin-top:7px}
+}
 
 /* Notes */
 .notes{padding:14px 16px;background:#f9f9f9;border-top:2px solid #ddd;font-size:12px;color:#444}
@@ -140,7 +145,14 @@ function tryPass(){
 <tr class="rf">
   <td class="ic">✈️</td>
   <td class="tm">10:50 →<br>15:45</td>
-  <td><div class="en">Победа DP957 · Казань → Анталья (AYT)</div><div class="es">В аэропорту к 08:50 · 1 место багажа 10 кг</div></td>
+  <td>
+    <div class="en">Победа DP957 · Казань → Анталья (AYT)</div>
+    <div class="es">В аэропорту к 08:50 · 1 место багажа 10 кг</div>
+    <div class="mob-links">
+      <a class="tl" href="tickets/kaz-ant-a.pdf" target="_blank">📄 Саша</a>
+      <a class="tl" href="tickets/kaz-ant-o.pdf" target="_blank">📄 Олеся</a>
+    </div>
+  </td>
   <td><div class="es">Олеся: место 20B</div></td>
   <td class="ca"><a class="tl" href="tickets/kaz-ant-a.pdf" target="_blank">📄 Билет</a></td>
   <td class="co"><a class="tl" href="tickets/kaz-ant-o.pdf" target="_blank">📄 Билет</a></td>
@@ -149,7 +161,14 @@ function tryPass(){
 <tr class="rf">
   <td class="ic">✈️</td>
   <td class="tm">19:30 →<br>22:50</td>
-  <td><div class="en">Transavia TO-3275 · Antalya (AYT) → Paris Orly (ORY)</div><div class="es">⚠️ Регистрация в AYT до 18:30 · пересадка: прилёт 15:45, 2ч 45мин</div></td>
+  <td>
+    <div class="en">Transavia TO-3275 · Antalya (AYT) → Paris Orly (ORY)</div>
+    <div class="es">⚠️ Регистрация в AYT до 18:30 · пересадка: прилёт 15:45, 2ч 45мин</div>
+    <div class="mob-links">
+      <a class="tl" href="tickets/ant-paris-a.pdf" target="_blank">📄 Саша</a>
+      <a class="tl" href="tickets/ant-paris-o.pdf" target="_blank">📄 Олеся</a>
+    </div>
+  </td>
   <td><div class="es">Орли → отель: OrlyBus → Denfert-Rochereau + метро, ~50 мин</div></td>
   <td class="ca"><a class="tl" href="tickets/ant-paris-a.pdf" target="_blank">📄 Билет</a></td>
   <td class="co"><a class="tl" href="tickets/ant-paris-o.pdf" target="_blank">📄 Билет</a></td>
@@ -158,7 +177,13 @@ function tryPass(){
 <tr class="rh">
   <td class="ic">🏨</td>
   <td class="tm">~23:40</td>
-  <td><div class="en">Заселение · Ibis Paris Canal Saint-Martin</div><div class="es">12 Rue Louis Blanc, 75010 · 15 мин пешком от Gare du Nord</div></td>
+  <td>
+    <div class="en">Заселение · Ibis Paris Canal Saint-Martin</div>
+    <div class="es">12 Rue Louis Blanc, 75010 · 15 мин пешком от Gare du Nord</div>
+    <div class="mob-links">
+      <a class="tl" href="tickets/paris-hotel.pdf" target="_blank">📄 Ваучер</a>
+    </div>
+  </td>
   <td><div class="es">Выезд 22 июля до 12:00 · Завтрак 20–22 июля включён</div></td>
   <td class="ca"><a class="tl" href="tickets/paris-hotel.pdf" target="_blank">📄 Ваучер</a></td>
   <td class="co"><a class="tl" href="tickets/paris-hotel.pdf" target="_blank">📄 Ваучер</a></td>
@@ -189,7 +214,14 @@ function tryPass(){
 <tr class="rt">
   <td class="ic">🚄</td>
   <td class="tm">09:24 →<br>10:47</td>
-  <td><div class="en">Eurostar 9321 · Paris Gare du Nord → Brussels Midi</div><div class="es"><span class="wt">⚠️ Регистрация закрывается 08:54</span> · Вагон 15, место 16 (Александр)</div></td>
+  <td>
+    <div class="en">Eurostar 9321 · Paris Gare du Nord → Brussels Midi</div>
+    <div class="es"><span class="wt">⚠️ Регистрация закрывается 08:54</span> · Вагон 15, место 16 (Александр)</div>
+    <div class="mob-links">
+      <a class="tl" href="tickets/paris-brus-a.pdf" target="_blank">📄 Саша</a>
+      <a class="tl" href="tickets/paris-brus-o.pdf" target="_blank">📄 Олеся</a>
+    </div>
+  </td>
   <td><div class="es">Romka и Lena — свои билеты</div></td>
   <td class="ca"><a class="tl" href="tickets/paris-brus-a.pdf" target="_blank">📄 Билет</a></td>
   <td class="co"><a class="tl" href="tickets/paris-brus-o.pdf" target="_blank">📄 Билет</a></td>
@@ -264,7 +296,14 @@ function tryPass(){
 <tr class="rw">
   <td class="ic">⚠️</td>
   <td class="tm">04:15</td>
-  <td><div class="en wt">Быть у шатла Tomorrowland → CRL</div><div class="es">Watertoren Reet, Keelhoevestraat 1, 2840 Rumst</div></td>
+  <td>
+    <div class="en wt">Быть у шатла Tomorrowland → CRL</div>
+    <div class="es">Watertoren Reet, Keelhoevestraat 1, 2840 Rumst</div>
+    <div class="mob-links">
+      <a class="tl" href="tickets/tomorrowland.pdf" target="_blank">📄 Саша</a>
+      <a class="tl" href="tickets/tomorrowland-o.pdf" target="_blank">📄 Олеся</a>
+    </div>
+  </td>
   <td><div class="es">35€ · взять ID · время уточнить на eventarea.be в день отправления</div></td>
   <td class="ca"><a class="tl" href="tickets/tomorrowland.pdf" target="_blank">📄 Шатл</a></td>
   <td class="co"><a class="tl" href="tickets/tomorrowland-o.pdf" target="_blank">📄 Шатл</a></td>
@@ -282,7 +321,14 @@ function tryPass(){
 <tr class="rf">
   <td class="ic">✈️</td>
   <td class="tm">07:45 →<br>09:25</td>
-  <td><div class="en">Ryanair FR9101 · Brussels CRL → Verona (VRN)</div><div class="es">Priority + 2 cabin bags · в аэропорту к 06:15</div></td>
+  <td>
+    <div class="en">Ryanair FR9101 · Brussels CRL → Verona (VRN)</div>
+    <div class="es">Priority + 2 cabin bags · в аэропорту к 06:15</div>
+    <div class="mob-links">
+      <a class="tl" href="tickets/crl-vrn.pdf" target="_blank">📄 Саша</a>
+      <a class="tl" href="tickets/crl-vrn.pdf" target="_blank">📄 Олеся</a>
+    </div>
+  </td>
   <td></td>
   <td class="ca"><a class="tl" href="tickets/crl-vrn.pdf" target="_blank">📄 Билет</a></td>
   <td class="co"><a class="tl" href="tickets/crl-vrn.pdf" target="_blank">📄 Билет</a></td>
@@ -298,7 +344,14 @@ function tryPass(){
 <tr class="rf">
   <td class="ic">✈️</td>
   <td class="tm">16:55 →<br>19:40</td>
-  <td><div class="en">Ryanair FR6998 · Verona (VRN) → Corfu (CFU)</div><div class="es">В аэропорту к 15:25</div></td>
+  <td>
+    <div class="en">Ryanair FR6998 · Verona (VRN) → Corfu (CFU)</div>
+    <div class="es">В аэропорту к 15:25</div>
+    <div class="mob-links">
+      <a class="tl" href="tickets/vrn-cfu.pdf" target="_blank">📄 Саша</a>
+      <a class="tl" href="tickets/vrn-cfu.pdf" target="_blank">📄 Олеся</a>
+    </div>
+  </td>
   <td></td>
   <td class="ca"><a class="tl" href="tickets/vrn-cfu.pdf" target="_blank">📄 Билет</a></td>
   <td class="co"><a class="tl" href="tickets/vrn-cfu.pdf" target="_blank">📄 Билет</a></td>
@@ -307,7 +360,13 @@ function tryPass(){
 <tr class="rh">
   <td class="ic">🏨</td>
   <td class="tm">от 15:00<br>(факт ~21h)</td>
-  <td><div class="en">Заселение · Casa Antica · Корфу</div><div class="es">1 Aristotelous, 3rd floor, Kerkira 49100 · Тел. +30 698 073 4752</div></td>
+  <td>
+    <div class="en">Заселение · Casa Antica · Корфу</div>
+    <div class="es">1 Aristotelous, 3rd floor, Kerkira 49100 · Тел. +30 698 073 4752</div>
+    <div class="mob-links">
+      <a class="tl" href="tickets/corfu.pdf" target="_blank">📄 Бронь</a>
+    </div>
+  </td>
   <td><div class="wt">⚠️ Предупредить о позднем заезде (~21:00)</div><div class="es">PIN: 6297 · 4 взрослых · NON-REFUNDABLE</div></td>
   <td class="ca"><a class="tl" href="tickets/corfu.pdf" target="_blank">📄 Бронь</a></td>
   <td class="co"><a class="tl" href="tickets/corfu.pdf" target="_blank">📄 Бронь</a></td>
@@ -338,7 +397,14 @@ function tryPass(){
 <tr class="rf">
   <td class="ic">✈️</td>
   <td class="tm">08:20 →<br>10:00</td>
-  <td><div class="en">Wizz Air W4 3286 · Corfu (CFU) → Bucharest OTP</div><div class="es">Только ручная кладь 40×30×20 см, макс 10 кг</div></td>
+  <td>
+    <div class="en">Wizz Air W4 3286 · Corfu (CFU) → Bucharest OTP</div>
+    <div class="es">Только ручная кладь 40×30×20 см, макс 10 кг</div>
+    <div class="mob-links">
+      <a class="tl" href="tickets/cfu-otp.pdf" target="_blank">📄 Саша</a>
+      <a class="tl" href="tickets/cfu-otp.pdf" target="_blank">📄 Олеся</a>
+    </div>
+  </td>
   <td></td>
   <td class="ca"><a class="tl" href="tickets/cfu-otp.pdf" target="_blank">📄 Билет</a></td>
   <td class="co"><a class="tl" href="tickets/cfu-otp.pdf" target="_blank">📄 Билет</a></td>
@@ -354,7 +420,14 @@ function tryPass(){
 <tr class="rf">
   <td class="ic">✈️</td>
   <td class="tm">19:45 →<br>21:45</td>
-  <td><div class="en">Wizz Air W4 3041 · Bucharest OTP → Antalya (AYT)</div><div class="es">В аэропорту к 18:15 · Только ручная кладь 40×30×20 см</div></td>
+  <td>
+    <div class="en">Wizz Air W4 3041 · Bucharest OTP → Antalya (AYT)</div>
+    <div class="es">В аэропорту к 18:15 · Только ручная кладь 40×30×20 см</div>
+    <div class="mob-links">
+      <a class="tl" href="tickets/otp-ayt.pdf" target="_blank">📄 Саша</a>
+      <a class="tl" href="tickets/otp-ayt.pdf" target="_blank">📄 Олеся</a>
+    </div>
+  </td>
   <td></td>
   <td class="ca"><a class="tl" href="tickets/otp-ayt.pdf" target="_blank">📄 Билет</a></td>
   <td class="co"><a class="tl" href="tickets/otp-ayt.pdf" target="_blank">📄 Билет</a></td>
@@ -375,7 +448,14 @@ function tryPass(){
 <tr class="rf">
   <td class="ic">✈️</td>
   <td class="tm">06:00 →<br>10:10</td>
-  <td><div class="en">Аэрофлот SU795 · Antalya (AYT) → Kazan (KZN)</div><div class="es">Эконом Лайт · Багаж не включён · Airbus A320</div></td>
+  <td>
+    <div class="en">Аэрофлот SU795 · Antalya (AYT) → Kazan (KZN)</div>
+    <div class="es">Эконом Лайт · Багаж не включён · Airbus A320</div>
+    <div class="mob-links">
+      <a class="tl" href="tickets/ant-kaz-a.pdf" target="_blank">📄 Саша</a>
+      <a class="tl" href="tickets/ant-kaz-o.pdf" target="_blank">📄 Олеся</a>
+    </div>
+  </td>
   <td></td>
   <td class="ca"><a class="tl" href="tickets/ant-kaz-a.pdf" target="_blank">📄 Билет</a></td>
   <td class="co"><a class="tl" href="tickets/ant-kaz-o.pdf" target="_blank">📄 Билет</a></td>
