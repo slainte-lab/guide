@@ -507,6 +507,39 @@ a.btn { text-decoration: none; }
   transform: translateX(-50%) translateY(0);
 }
 
+/* ─── PLAY BANNER ─── */
+#play-banner {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 3000;
+  background: #C9A84C;
+  color: #1a1a1a;
+  padding: 12px 16px;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 3px 16px rgba(0,0,0,.5);
+  animation: banner-pulse 1.8s ease-in-out infinite;
+}
+#play-banner.show { display: flex; }
+#play-banner-text { flex: 1; font-size: 14px; font-weight: 600; line-height: 1.3; }
+#play-banner-btn {
+  background: #1a1a1a;
+  color: #C9A84C;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 18px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+@keyframes banner-pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: .82; }
+}
+
 /* ─── USER POSITION DOT (Leaflet) ─── */
 .user-dot {
   width: 14px;

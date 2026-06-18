@@ -23,7 +23,7 @@ function startSpeak() {
 
   _audio = new Audio(`data/audio/${STOPS[cur].id}_${type}.mp3`);
 
-  _audio.onplay  = () => { speaking = true;  isPaused = false; _updatePlayBtn(); };
+  _audio.onplay  = () => { speaking = true;  isPaused = false; _updatePlayBtn(); _hidePlayBanner(); };
   _audio.onpause = () => {
     speaking = false;
     isPaused = _audio.currentTime > 0 && !_audio.ended;
@@ -49,7 +49,7 @@ function startSpeak() {
       // iOS autoplay blocked — audio loaded, waiting for user tap
       isPaused = true;
       _updatePlayBtn();
-      showToast('Нажмите ▶ для воспроизведения');
+      _showPlayBanner();
     } else {
       isPaused = false; _audio = null;
       _updatePlayBtn();
@@ -67,6 +67,7 @@ function resumeSpeak() {
 
 function stopSpeak() {
   speaking = false; isPaused = false;
+  _hidePlayBanner();
   if (_audio) {
     _audio.onplay = _audio.onpause = _audio.onended = _audio.onerror = null;
     _audio.pause();
@@ -93,6 +94,29 @@ function _maybeAutoFacts() {
     if (bFacts) { bFacts.disabled = false; bFacts.classList.add('on'); }
     startSpeak();
   }, 2000);
+}
+
+// ── БАННЕР «НАЖМИТЕ ▶» ────────────────────────────────────────────
+
+function _showPlayBanner() {
+  const banner = document.getElementById('play-banner');
+  const text   = document.getElementById('play-banner-text');
+  if (!banner || !text) return;
+  const name = cur >= 0 ? STOPS[cur].n : '';
+  const mode = typeof factsMode !== 'undefined' && factsMode ? 'Доп. факты' : 'Аудио';
+  text.textContent = `📍 ${mode}: ${name}`;
+  banner.classList.add('show');
+  if (navigator.vibrate) navigator.vibrate([200, 100, 200]);
+}
+
+function _hidePlayBanner() {
+  const banner = document.getElementById('play-banner');
+  if (banner) banner.classList.remove('show');
+}
+
+function bannerPlay() {
+  _hidePlayBanner();
+  resumeSpeak();
 }
 
 // ── ВНУТРЕННИЕ ─────────────────────────────────────────────────────

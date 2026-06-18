@@ -125,20 +125,17 @@ function mapFlyTo(lat, lng) {
 
 // ── СЛЕЖЕНИЕ ЗА ГЕОПОЗИЦИЕЙ ────────────────────────────────────────
 function startMapTracking() {
-  if (!navigator.geolocation || mapTrackId !== null) return;
-  mapTrackId = navigator.geolocation.watchPosition(
-    pos => {
-      const { latitude: lat, longitude: lng } = pos.coords;
-      lastPos = [lat, lng];
-      updateUserMarker(lat, lng);
-      if (isFollowing) {
-        isProgrammaticMove = true;
-        map.panTo([lat, lng]);
-      }
-    },
-    () => {},
-    { enableHighAccuracy: true, maximumAge: 3000, timeout: 10000 }
-  );
+  if (mapTrackId !== null) return; // уже подписан
+  mapTrackId = 1; // флаг «подписан»
+  onPositionUpdate((lat, lng) => {
+    lastPos = [lat, lng];
+    updateUserMarker(lat, lng);
+    if (isFollowing) {
+      isProgrammaticMove = true;
+      map.panTo([lat, lng]);
+    }
+  });
+  _ensureWatch(); // запускаем общий watchPosition если ещё не запущен
 }
 
 function _onFollowClick() {

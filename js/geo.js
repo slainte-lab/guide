@@ -1,12 +1,15 @@
 // ─── GEO MODULE — GPS автогид ─────────────────────────────────────
-// Geolocation API: следит за позицией, авtozапускает аудио при
-// входе в радиус GPS_RADIUS метров от остановки.
+// Единственный watchPosition на всё приложение. Карта подписывается
+// через onPositionUpdate, GPS-автогид — через gpsActive.
 
 const GPS_RADIUS = 50; // метры
 let gpsWatchId    = null;
 let gpsActive     = false;
-let notifiedStops = new Set(); // уже сработавшие остановки в этой сессии
-let _keepAliveCtx = null;      // AudioContext-тишина: не даёт iOS убить геолокацию в фоне
+let notifiedStops = new Set();
+let _keepAliveCtx = null;
+
+// Внешние подписчики на позицию (например, карта)
+let _positionListeners = [];
 
 function _startKeepAlive() {
   try {
@@ -36,6 +39,29 @@ function toggleGPS() {
   else startGPS();
 }
 
+function onPositionUpdate(fn) {
+  _positionListeners.push(fn);
+}
+
+function _ensureWatch() {
+  if (gpsWatchId !== null) return;
+  if (!navigator.geolocation) return;
+  gpsWatchId = navigator.geolocation.watchPosition(
+    _onPosition,
+    _onError,
+    { enableHighAccuracy: true, maximumAge: 5000, timeout: 15000 }
+  );
+}
+
+function _mayStopWatch() {
+  // Останавливаем watchPosition только когда никто не слушает
+  if (gpsActive || _positionListeners.length > 0) return;
+  if (gpsWatchId !== null) {
+    navigator.geolocation.clearWatch(gpsWatchId);
+    gpsWatchId = null;
+  }
+}
+
 function startGPS() {
   if (!navigator.geolocation) {
     showToast('Геолокация не поддерживается вашим браузером');
@@ -44,31 +70,27 @@ function startGPS() {
   gpsActive = true;
   notifiedStops.clear();
   _setGPSBtn(true);
-  _startKeepAlive(); // держим аудиосессию живой, чтобы iOS не убил геолокацию в фоне
+  _startKeepAlive();
   showToast('GPS включён · разрешите геолокацию в браузере');
-
-  gpsWatchId = navigator.geolocation.watchPosition(
-    _onPosition,
-    _onError,
-    { enableHighAccuracy: true, maximumAge: 5000, timeout: 15000 }
-  );
+  _ensureWatch();
 }
 
 function stopGPS() {
-  if (gpsWatchId !== null) {
-    navigator.geolocation.clearWatch(gpsWatchId);
-    gpsWatchId = null;
-  }
   gpsActive = false;
   _stopKeepAlive();
   _setGPSBtn(false);
   showToast('GPS отключён');
+  _mayStopWatch();
 }
 
 function _onPosition(pos) {
   const { latitude: lat, longitude: lng } = pos.coords;
 
-  // Проверяем близость к каждой остановке
+  // Раздаём позицию всем подписчикам (карта и др.)
+  _positionListeners.forEach(fn => fn(lat, lng));
+
+  // GPS-автогид: проверяем близость к остановкам
+  if (!gpsActive) return;
   STOPS.forEach((s, i) => {
     if (done.has(i) || notifiedStops.has(i)) return;
     if (_dist(lat, lng, s.lat, s.lng) <= GPS_RADIUS) {
