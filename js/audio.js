@@ -1,9 +1,10 @@
 // ─── AUDIO MODULE ────────────────────────────────────────────────
 // Только MP3-файлы из data/audio/{id}_main.mp3 / {id}_facts.mp3
 
-let speaking = false;
-let isPaused = false;
-let _audio   = null;    // HTMLAudioElement
+let speaking     = false;
+let isPaused     = false;
+let _audio       = null;   // HTMLAudioElement
+let _playPromise = null;   // pending play() promise (нужно для iOS)
 
 // ── ПУБЛИЧНЫЙ API ──────────────────────────────────────────────────
 
@@ -31,6 +32,7 @@ function startSpeak() {
   };
   _audio.onended = () => {
     speaking = false; isPaused = false;
+    _playPromise = null;
     _updatePlayBtn();
     if (type === 'main') {
       markDone();
@@ -38,27 +40,43 @@ function startSpeak() {
     }
   };
   _audio.onerror = () => {
-    speaking = false; isPaused = false; _audio = null;
+    speaking = false; isPaused = false; _audio = null; _playPromise = null;
     _updatePlayBtn();
     showToast('Аудио не найдено');
   };
 
-  _audio.play().catch(e => {
-    speaking = false;
-    if (e && e.name === 'NotAllowedError') {
-      // iOS autoplay blocked — audio loaded, waiting for user tap
-      isPaused = true;
-      _updatePlayBtn();
-      _showPlayBanner();
-    } else {
-      isPaused = false; _audio = null;
-      _updatePlayBtn();
-    }
-  });
+  // Оптимистично отмечаем как playing — кнопка сразу показывает «Пауза»,
+  // не даём повторному тапу вызвать startSpeak() до срабатывания onplay.
+  speaking = true;
+  _updatePlayBtn();
+
+  _playPromise = _audio.play();
+  if (_playPromise) {
+    _playPromise.catch(e => {
+      _playPromise = null;
+      if (!_audio) return; // уже остановлено через stopSpeak
+      speaking = false;
+      if (e && e.name === 'NotAllowedError') {
+        // iOS заблокировал автовоспроизведение — ждём тапа пользователя
+        isPaused = true;
+        _updatePlayBtn();
+        _showPlayBanner();
+      } else {
+        isPaused = false; _audio = null;
+        _updatePlayBtn();
+      }
+    });
+  }
 }
 
 function pauseSpeak() {
-  if (_audio) _audio.pause();
+  if (!_audio) return;
+  if (_playPromise) {
+    // iOS: нельзя pause() пока play() pending — ждём resolve
+    _playPromise.then(() => { if (_audio) _audio.pause(); }).catch(() => {});
+  } else {
+    _audio.pause();
+  }
 }
 
 function resumeSpeak() {
@@ -68,11 +86,15 @@ function resumeSpeak() {
 function stopSpeak() {
   speaking = false; isPaused = false;
   _hidePlayBanner();
+  const p = _playPromise;
+  _playPromise = null;
   if (_audio) {
-    _audio.onplay = _audio.onpause = _audio.onended = _audio.onerror = null;
-    _audio.pause();
-    _audio.src = '';
+    const a = _audio;
     _audio = null;
+    a.onplay = a.onpause = a.onended = a.onerror = null;
+    const doStop = () => { try { a.pause(); } catch(_) {} a.src = ''; };
+    // iOS: если play() ещё pending, pause() бросает AbortError → ждём
+    if (p) { p.then(doStop).catch(doStop); } else { doStop(); }
   }
   _updatePlayBtn();
 }
@@ -85,9 +107,10 @@ function _maybeAutoFacts() {
   if (typeof _dist !== 'function' || typeof GPS_RADIUS === 'undefined') return;
   const s = STOPS[cur];
   if (_dist(lastPos[0], lastPos[1], s.lat, s.lng) > GPS_RADIUS) return;
-  // ещё в радиусе — через 2 с запускаем факты
+  const stopAtSchedule = cur; // фиксируем точку — вдруг пользователь переключится
   setTimeout(() => {
-    if (speaking || isPaused || cur < 0) return; // пользователь уже что-то запустил
+    if (cur !== stopAtSchedule) return; // ушли на другую точку
+    if (speaking || isPaused || cur < 0) return;
     factsMode = true;
     document.getElementById('pl-text').textContent = STOPS[cur].facts;
     const bFacts = document.getElementById('btn-facts');
