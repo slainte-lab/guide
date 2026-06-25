@@ -1,7 +1,7 @@
 # AudioGuide — контекст проекта
 
 ## Что это
-Статический сайт на GitHub Pages (`https://slainte-lab.github.io/bruges-audio-guide/`).  
+Статический сайт на GitHub Pages (`https://slainte-lab.github.io/guide/`).  
 Два слоя: **аудиогиды по городам** + **маршрутный лист поездки** с паролем.
 
 ## Поездка
