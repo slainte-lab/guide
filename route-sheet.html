@@ -62,6 +62,15 @@ tr.rc td{background:#f8f8f8;vertical-align:middle}
 .notes ul{margin:7px 0 0 18px;line-height:2.1}
 .notes b{color:#0d1b2a}
 
+/* ── Offline toolbar ── */
+.offline-bar{display:flex;gap:8px;padding:10px 14px;background:#f5f7fa;border-bottom:1px solid #dde3ec;flex-wrap:wrap}
+.offline-btn{display:flex;align-items:center;gap:6px;padding:8px 13px;border:none;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;transition:background .15s}
+.offline-btn.cache{background:#1a1a6e;color:#fff}
+.offline-btn.cache:hover{background:#2a2a9e}
+.offline-btn.dl{background:#e8ecf8;color:#1a1a6e}
+.offline-btn.dl:hover{background:#c8d4f8}
+.offline-btn:disabled{opacity:.6;cursor:default}
+
 /* ── Password overlay ── */
 #ov{position:fixed;inset:0;background:#0d1b2a;z-index:9999;display:flex;align-items:center;justify-content:center}
 #ov-box{text-align:center;width:290px;padding:0 16px}
@@ -115,6 +124,11 @@ function tryPass(){
   <h1>🗺 Маршрут — Европа 2026</h1>
   <div class="sub">Олеся + Саша · 19 июля – 2 августа · 15 дней</div>
   <a href="./">‹ Аудиогиды</a>
+</div>
+
+<div class="offline-bar">
+  <button class="offline-btn cache" id="btn-cache" onclick="cacheTickets()">💾 В браузер (офлайн)</button>
+  <button class="offline-btn dl" id="btn-dl" onclick="downloadTickets()">📥 Скачать на телефон</button>
 </div>
 
 <table>
@@ -494,5 +508,58 @@ function tryPass(){
 </div>
 
 </div>
+<script>
+const TICKETS = [
+  'tickets/kaz-ant-a.pdf','tickets/kaz-ant-o.pdf',
+  'tickets/ant-paris-a.pdf','tickets/ant-paris-o.pdf',
+  'tickets/paris-hotel.pdf',
+  'tickets/paris-brus-a.pdf','tickets/paris-brus-o.pdf',
+  'tickets/tomorrowland.pdf','tickets/tomorrowland-o.pdf',
+  'tickets/crl-vrn.pdf','tickets/vrn-cfu.pdf',
+  'tickets/corfu.pdf',
+  'tickets/cfu-otp.pdf','tickets/otp-ayt.pdf',
+  'tickets/ant-kaz-a.pdf','tickets/ant-kaz-o.pdf'
+];
+
+async function cacheTickets() {
+  const btn = document.getElementById('btn-cache');
+  if (!('caches' in window)) {
+    btn.textContent = '❌ Не поддерживается';
+    return;
+  }
+  btn.disabled = true;
+  try {
+    const cache = await caches.open('tickets-v1');
+    for (let i = 0; i < TICKETS.length; i++) {
+      btn.textContent = `⏳ ${i + 1} / ${TICKETS.length}`;
+      await cache.add(TICKETS[i]);
+    }
+    btn.textContent = '✅ Готово — работает офлайн';
+  } catch(e) {
+    btn.textContent = '❌ Ошибка — попробуйте ещё раз';
+    btn.disabled = false;
+  }
+}
+
+async function downloadTickets() {
+  const btn = document.getElementById('btn-dl');
+  btn.disabled = true;
+  for (let i = 0; i < TICKETS.length; i++) {
+    btn.textContent = `⏳ ${i + 1} / ${TICKETS.length}`;
+    const res = await fetch(TICKETS[i]);
+    const blob = await res.blob();
+    const url  = URL.createObjectURL(blob);
+    const a    = document.createElement('a');
+    a.href     = url;
+    a.download = TICKETS[i].split('/').pop();
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    await new Promise(r => setTimeout(r, 600));
+  }
+  btn.textContent = '✅ Готово';
+}
+</script>
 </body>
 </html>
