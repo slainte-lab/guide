@@ -18,8 +18,8 @@
 - Трек ARTBAT — Take You There, стартует с дропа: `DROP = 115` секунд
 - Логотип: `tomorrowland/logo.png` (festival logo, не Disney-фильм)
 
-## Pending
-- **Забронировать отель в Генте** на ночь 22→23 июля (пока не забронировано, есть warning-строка в маршруте)
+## Отель Гент
+Hotel Gravensteen · Jan Breydelstraat 35 · Check-in 22 июля от 15:00 · Check-out 23 июля до 11:00 · Завтрак включён · PIN 7871 · 2 номера
 
 ## Архитектура
 - `index.html` — главная, список городов
